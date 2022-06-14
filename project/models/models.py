@@ -91,7 +91,7 @@ class User(db.Model):
     
 
 
-class Font_Style(db.Model):
+class FontStyle(db.Model):
 
     ___tablename__ = 'users'
 
@@ -232,6 +232,8 @@ class StyleGuide(db.Model):
         db.ForeignKey('color_schemes.id'),
         nullable=False
     )
+
+    color_scheme = db.relationship('ColorScheme', backref='style_guides')
 
     p = db.Column(
         db.Integer,
