@@ -37,7 +37,7 @@ class FontStyle(db.Model):
     font_style = db.Column(
         db.Text,
         nullable=False,
-        default="Normal"
+        default="normal"
     )
 
     font_size = db.Column(
