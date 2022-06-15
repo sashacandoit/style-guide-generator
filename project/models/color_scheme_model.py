@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 import webcolors 
+from webcolors import name_to_rgb, hex_to_rgb
 
 db = SQLAlchemy()
 
@@ -59,3 +60,34 @@ class ColorScheme(db.Model):
         nullable=False,
         default=datetime.utcnow()
     )
+
+
+    def convert_color_to_rgb(self, color):
+        """Convert a color name or hex value to rbg value"""
+
+        def hex_to_rgb():
+            rgb = hex_to_rgb(color)
+            print(rgb)
+            return rgb
+
+        def name_to_rgb():
+            rgb = name_to_rgb(color)
+            print(rgb)
+            return rgb
+
+        for func in [hex_to_rgb, name_to_rgb]:
+            try:
+                func(color)
+                break
+            except Exception as err:
+                print (err, f"{color} is not a valid color")
+                continue
+
+
+
+    def __repr__(self):
+        return f"<ColorScheme {self.user.username}-{self.id}: Primary={self.primary}, Secondary={self.secondary}, Accent_1={self.accent_1}, Accent_2={self.accent_2}, Accent_3={self.accent_3}>"
+
+
+        
+
