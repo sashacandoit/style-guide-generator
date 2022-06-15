@@ -1,7 +1,9 @@
 import os
 from unittest import TestCase
-from sqlalchemy.exc import IntegrityError
-from project.models.color_scheme_model import User, ColorScheme, StyleGuide, FontStyle
+from project.models.color_scheme_model import ColorScheme
+from project.models.user_model import User
+from project.models.font_style_model import FontStyle
+from project.models.style_guide_model import Styleguide
 
 os.environ['DATABASE_URL'] = "postgresql:///style_guide_maker_test"
 
@@ -9,14 +11,20 @@ from project import app, db
 
 
 class BaseTestCase(TestCase):
-    """Base test case to use with all tests"""
+    """
+    Base test case to use with all tests -
+    setUp and tearDown for all tests
+    """
 
     def create_app(self):
         app.config.from_object('config.TestConfig')
         return app
 
+
+    """Create app and add all tables with sample data"""
     def setUp(self):
         db.create_all()
+
         db.session.add(
             User(
                 dict(
@@ -37,5 +45,36 @@ class BaseTestCase(TestCase):
                 )
             ))
 
+        db.session.add(
+            FontStyle(
+                dict(
+                    font_family="sans-serif",
+                    font_weight=400,
+                    font_style="normal",
+                    font_size=18,
+                    font_color="primary"
+                )
+            ))
+
+        # db.session.add(
+        #     StyleGuide(
+        #         dict(
+        #             title="Test Style Guide",
+        #             color_scheme_id="",
+        #             p="",
+        #             h1="",
+        #             h2="",
+        #             h3="",
+        #             h4="",
+        #             h5="",
+        #             h6=""
+        #         )
+        #     ))
 
         db.session.commit()
+
+    
+    """Clear sample data from each table after each test"""
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
