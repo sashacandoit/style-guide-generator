@@ -28,13 +28,13 @@ class ColorScheme(db.Model):
     primary = db.Column(
         db.Text,
         nullable=False,
-        default="000000"
+        default="0,0,0"
     )
 
     secondary = db.Column(
         db.Text,
         nullable=False,
-        default="ffffff"
+        default="255,255,255"
     )
 
     acccent_1 = db.Column(

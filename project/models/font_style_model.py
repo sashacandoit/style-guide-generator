@@ -31,13 +31,24 @@ class FontStyle(db.Model):
     font_weight = db.Column(
         db.Integer,
         nullable=False,
-        default="400"
+        default="regular"
     )
 
     font_style = db.Column(
         db.Text,
         nullable=False,
-        default="normal"
+        default=None
+    )
+
+    font_file = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    font_transform = db.Column(
+        db.Text,
+        nullable=False,
+        default=None
     )
 
     font_size = db.Column(
