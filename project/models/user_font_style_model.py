@@ -1,12 +1,14 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKeyConstraint
+from api_font_model import APIFontStyle
 
 db = SQLAlchemy()
 
 
-class FontStyle(db.Model):
+class UserFontStyle(db.Model):
 
-    ___tablename__ = 'font_styles'
+    ___tablename__ = 'user_font_styles'
 
     id = db.Column (
         db.Integer,
@@ -22,27 +24,26 @@ class FontStyle(db.Model):
 
     user = db.relationship('User', backref='font_styles')
 
+
     font_family = db.Column(
         db.Text,
-        nullable=False,
-        default="sans-serif"
+        # db.ForeignKey('api_font_styles.font_family')
     )
 
     font_weight = db.Column(
         db.Integer,
-        nullable=False,
-        default="regular"
+        # db.ForeignKey('api_font_styles.font_weight')
     )
+
+    __table_args__ = (ForeignKeyConstraint(
+        [font_family, font_weight],
+        [APIFontStyle.font_family, APIFontStyle.font_weight]
+    ))
 
     font_style = db.Column(
         db.Text,
         nullable=False,
         default=None
-    )
-
-    font_file = db.Column(
-        db.Text,
-        nullable=False
     )
 
     font_transform = db.Column(
