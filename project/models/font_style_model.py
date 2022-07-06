@@ -6,7 +6,7 @@ db = SQLAlchemy()
 
 class FontStyle(db.Model):
 
-    ___tablename__ = 'users'
+    ___tablename__ = 'font_styles'
 
     id = db.Column (
         db.Integer,
