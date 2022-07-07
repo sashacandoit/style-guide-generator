@@ -10,24 +10,31 @@ CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///capstone_1_db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['SECRET_KEY'] = 'somethingsecret'
 
 connect_db(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///capstone_1_db'))
 
 
 
 
-res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+# res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
 
-data = res.json()
+# data = res.json()
 
-for item in data['items']:
-    print(item['family'], item['variants'])
+# for item in data['items']:
+#     print(item['family'], item['variants'])
 
+
+
+@app.route('/')
+def home_page():
+    """Render home page"""
+
+    return render_template("home.html")
 
 
