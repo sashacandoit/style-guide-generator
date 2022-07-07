@@ -1,4 +1,6 @@
 .DS_Store
 venv/
 __pycache__/
-secrets.py
+models/__pycache__/
+project/__pycache__/
+api_keys.py

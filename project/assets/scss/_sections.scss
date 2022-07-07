@@ -1,0 +1,686 @@
+/*---------- sections ----------*/
+
+section {
+    position: relative;
+    padding: 30px 0;
+}
+
+section.big {
+    padding: 50px 0;
+}
+
+section.lg {
+    padding: 100px 0;
+}
+
+section.xl {
+    padding: 200px 0;
+}
+
+section.fh {
+    height: 100vh;
+}
+
+.page-section .sidebar {
+    padding: 30px;
+}
+
+section .container {
+    z-index: 2;
+}
+
+/*-------- headers --------*/
+
+header {
+    padding: 30px 0;
+    position: relative;
+}
+
+header.big {
+    padding: 50px 0;
+}
+
+header.lg {
+    padding: 100px 0;
+}
+
+header.xl {
+    padding: 250px 0;
+}
+
+header.xxl {
+    padding: 350px 0;
+}
+
+header.fh {
+    height: 100vh;
+}
+
+header h1.page-title {
+    font-size: 70px;
+    position: relative;
+    z-index: 1;
+    text-shadow: $shadow-xs;
+}
+
+header h1.fixed-title {
+    transform: translateY(-100%);
+    position: fixed;
+    top: 335px;
+    left: 0;
+    right: 0;
+}
+
+.header-image-bottom {
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+    margin-bottom: -2px;
+}
+
+.main-container {
+    position: relative;
+    background: $body-bg;
+}
+
+.pnf-page-title {
+    font-size: 90px;
+    position: relative;
+    z-index: 1;
+    text-shadow: $shadow-xs;
+}
+
+header .container {
+    position: relative;
+    z-index: 2;
+}
+
+/*-------- end of headers --------*/
+
+
+
+/*------- portfolio -------*/
+
+.project {
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.project .hovereffect {
+    border-radius: 5px;
+}
+
+.no-gutter .project {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.card .project {
+    margin: 0;
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.card .project img {
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.card .project .portfolio-item {
+    margin: 0;
+}
+
+.card .project .hovereffect {
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.has-spacer {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.has-spacer-extra-space {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.has-side-spacer {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.project-title {
+    font-size: 1.25rem;
+}
+
+.project-skill {
+    font-size: 0.9rem;
+    font-weight: $regular;
+    letter-spacing: $lsp-2x;
+}
+
+
+/*--- lightbox ---*/
+
+.mfp-wrap {
+    z-index: 999999 !important;
+}
+
+.mfp-bg {
+    background: $inverse-color !important;
+    opacity: 0.9 !important;
+    z-index: 999998 !important;
+}
+
+.mfp-content {
+    max-width: 80% !important;
+}
+
+.body.dark .mfp-figure:after {
+    box-shadow: none !important;
+    background: $dark-grey !important;
+}
+
+.mfp-figure:after {
+    box-shadow: none !important;
+    background: $secondary !important;
+}
+
+.mfp-close {
+    content: "\f00d" !important;
+    font-family: 'FontAwesome 5 Free' !important;
+    right: -8px !important;
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    color: $white !important;
+    opacity: 0.7 !important;
+    top: -3px !important;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+
+.mfp-close:hover {
+    opacity: 1 !important;
+}
+
+.mfp-arrow {
+    color: $white;
+    opacity: 0.7 !important;
+    -moz-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+}
+
+.mfp-arrow:hover {
+    opacity: 1 !important;
+}
+
+.mfp-arrow:after {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+    top: 5px !important;
+}
+
+.mfp-arrow-right:before {
+    border-left: none !important;
+}
+
+.mfp-arrow-left:before {
+    border-right: none !important;
+}
+
+.mfp-arrow-right:after {
+    content: "\f054" !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 30px;
+    border-right: none !important;
+    margin-left: 25px !important;
+}
+
+.mfp-arrow-left:after {
+    content: "\f053" !important;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 30px;
+    border-right: none !important;
+    margin-left: 15px !important;
+}
+
+.mfp-title {
+    color: $grey !important;
+    font-size: 1rem !important;
+    line-height: 1.75rem !important;
+    font-weight: $regular !important;
+}
+
+.mfp-counter {
+    color: $grey !important;
+    font-size: 1rem !important;
+    line-height: 1.75rem !important;
+    font-weight: $regular !important;
+}
+
+.mfp-fade.mfp-bg.mfp-removing {
+  opacity: 0;
+}
+
+.mfp-fade.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+}
+
+.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@-moz-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@-o-keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}    
+    100% {opacity: 1;}
+}
+
+.mfp-figure { 
+    -webkit-animation-name: fadeIn;
+    -moz-animation-name: fadeIn;
+    -o-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+.mfp-iframe-scaler iframe {
+    padding: 15px 0;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/*--- end of lightbox ---*/
+
+
+
+/*--- default effect ---*/
+
+.hovereffect {
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.hovereffect .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background-color: rgba(245,247,254,0.75);
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.primary-dark .hovereffect .overlay {
+    background-color: $primary-transparent-dark;
+}
+
+.white .hovereffect .overlay {
+    background-color: rgba(255,255,255,0.75);
+}
+
+.hovereffect img {
+    display: block;
+    position: relative;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+}
+
+.hovereffect:hover img {
+    -ms-transform: scale(1.1);
+    -webkit-transform: rotate(1.1);
+    transform: scale(1.1);
+}
+
+.hovereffect-title .project-title-wrapper {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    transform: translateY(-50%);
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.project:hover .hovereffect-title .project-title-wrapper {
+    top: 50%;
+}
+
+.hovereffect-title .project-title {
+    color: $white;
+    background: transparent;
+    margin-bottom: 5px;
+}
+
+.white .hovereffect-title .project-title {
+    color: $title-color;
+}
+
+.hovereffect-title p {
+    color: $white;
+    background: transparent;
+    font-size: 12px;
+    margin: 0;
+}
+
+.white .hovereffect-title p {
+    color: $text-color;
+}
+
+.hovereffect-title .hover-icons {
+    font-size: 16px;
+    background: transparent;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.project:hover .hovereffect-title .hover-icons {
+    bottom: 15%;
+}
+
+.hovereffect-title .hover-icons a {
+    color: $white;
+}
+
+.white .hovereffect-title .hover-icons a {
+    color: $title-color;
+}
+
+.hovereffect-title.project-icons {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.project:hover .hovereffect-title.project-icons {
+    top: 50%;
+}
+
+.project-icons a:hover {
+    background-color: $dark-grey;
+}
+
+.hovereffect-title.project-icons a {
+    display: inline-block;
+    color: $primary;
+    font-size: 1rem;
+    line-height: 50px !important;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    background: $body-bg;
+    border-radius: 50px;
+    box-shadow: $shadow-xs;
+}
+
+.hovereffect-title.project-icons a i {
+    line-height: 50px !important;
+}
+
+.hovereffect-title.project-icons .hover-icons {
+    color: $white;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    opacity: 1;
+}
+
+.hovereffect-title.project-icons a:hover {
+    color: $primary;
+    background: $body-bg;
+    box-shadow: $shadow-inset-xs;
+}
+
+.primary-dark .project-icons a {
+    color: $primary;
+    background-color: $white;
+}
+
+.primary-dark .project-icons a:hover {
+    background-color: $light-grey-dark;
+}
+
+.primary-dark .project-icons a:hover {
+    color: $white;
+}
+
+.primary-dark .hovereffect-title.project-icons .hover-icons {
+    color: $primary;
+}
+
+.white .hovereffect-title .hover-icons {
+    color: $title-color;
+}
+
+.white .hovereffect-title.project-icons .hover-icons {
+    color: $title-color;
+}
+
+.hovereffect-title .hover-icons a {
+    opacity: 0.7;
+    margin: 0 4px;
+}
+
+.hovereffect-title .hover-icons a {
+    opacity: 0.7;
+}
+
+.hovereffect-title .hover-icons a:hover {
+    opacity: 1;
+}
+
+.hovereffect:hover .overlay {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+/*--- end of default effect ---*/
+
+
+
+/*--- portfolio-filter ---*/
+
+.portfolio-filter {
+    margin-bottom: 30px;
+}
+
+.portfolio-filter.list-inline li {
+    display: inline-block;
+    padding: 0;
+}
+
+.portfolio-filter a {
+    color: $text-color;
+    font-family: $title-font !important;
+    font-size: 14px;
+    font-weight: $bold;
+    letter-spacing: $lsp-2x;
+    line-height: 40px;
+    border-radius: 50px;
+    margin: 0;
+    padding: 14px 40px;
+}
+
+.portfolio-filter a:hover, .portfolio-filter a:focus, .portfolio-filter a:active {
+    color: $primary;
+    background-color: transparent;
+    box-shadow: $shadow-sm !important;
+}
+
+.portfolio-filter a.active {
+    color: $primary;
+    background: transparent;
+    border-radius: 50px;
+    border: none;
+    box-shadow: $shadow-sm !important;
+}
+
+.portfolio-filter a.active:hover, .portfolio-filter a.active:focus {
+    color: $primary;
+    background: transparent;
+    box-shadow: $shadow-inset-sm !important;
+}
+
+/*--- end of portfolio-filter ---*/
+
+/*------- end of portfolio -------*/
+
+
+
+/*------- footers -------*/
+
+footer {
+    background: $shadow-color;
+    padding: 40px 0;
+}
+
+footer p {
+    color: $title-color;
+    margin-bottom: 0;
+}
+
+footer.big {
+    padding: 60px 0;
+}
+
+footer.light {
+    background: $secondary;
+}
+
+footer.mid {
+    background: $secondary-dark;
+}
+
+footer.dark {
+    background: $dark-grey;
+}
+
+footer.dark p {
+    color: $light-grey;
+}
+
+footer.dark a {
+    color: $white;
+}
+
+footer.dark a:hover {
+    color: $grey;
+}
+
+.footer-widget-area {
+    padding: 40px 0;
+}
+
+.footer-left-area {
+    text-align: left;
+}
+
+.footer-right-area {
+    text-align: right;
+}
+
+footer.dark.bg-primary a, footer.dark.bg-primary-dark a {
+    color: $white;
+}
+
+footer.dark.bg-primary a:hover, footer.dark.bg-primary-dark a:hover {
+    opacity: 0.75;
+}
+
+.footer-link, .footer-link:focus {
+    font-weight: $regular;
+    color: $inverse-color;
+}
+
+.footer-link:hover {
+    color: $inverse-color;
+    opacity: 0.6;
+}
+
+.dark .footer-link {
+    color: $secondary;
+}
+
+.dark .footer-link:hover {
+    color: $secondary;
+    opacity: 0.6;
+}
+
+.footer-logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+/*------- end of footers -------*/
+
+/*---------- end of sections ----------*/

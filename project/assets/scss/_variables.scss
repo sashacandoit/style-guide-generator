@@ -1,0 +1,100 @@
+// Typography
+
+$title-font: 'Nunito', sans-serif;
+$primary-font: 'Nunito Sans', sans-serif;
+$secondary-font: 'Nunito', sans-serif;
+$light: 300;
+$regular: 600;
+$bold: 800;
+$lsp: 0.015rem;
+$lsp-2x: 0.03rem;
+$lsp-big: 0.05rem;
+$lsp-extra: 0.15rem;
+$input-height: 52px;
+
+// Color Palette
+
+$primary: #5360de;
+$primary-dark: #353fa3;
+$primary-gradient: linear-gradient(120deg, #6782e6 0%, $primary 100%);
+$primary-transparent: rgba(83,96,222,0.5);
+$primary-transparent-dark: rgba(83,96,222,0.75);
+$secondary: #97989d;
+$secondary-dark: #6a6b71;
+$secondary-gradient: linear-gradient(120deg, #d6d8de 0%, $secondary 100%);
+$success: #2e9f36;
+$success-dark: #19711f;
+$success-gradient: linear-gradient(120deg, #52c15a 0%, $success 100%);
+$info: #269291;
+$info-dark: #116665;
+$info-gradient: linear-gradient(120deg, #44bab9 0%, $info 100%);
+$warning: #dd8526;
+$warning-dark: #bf690c;
+$warning-gradient: linear-gradient(120deg, #f19a53 0%, $warning 100%);
+$danger: #dd2626;
+$danger-dark: #b21b1b;
+$danger-gradient: linear-gradient(120deg, #ee4545 0%, $danger 100%);
+$body-bg: #f5f7fe;
+$dark-body: #373839;
+$shadow-color: #e2e6fc;
+$shadow-color-dark: #c9d0f4;
+$light-grey: #eff1f8;
+$light-grey-dark: #dddee4;
+$grey: #d6d8df;
+$grey-dark: #8e8f94;
+$grey-gradient: linear-gradient(120deg, $light-grey-dark 0%, $grey 100%);
+$dark-grey: #505254;
+$dark-grey-dark: #303132;
+$inverse-color: #19191a;
+$title-color: #191941;
+$text-color: #656774;
+$white: #fff;
+$white-gradient: linear-gradient(120deg, $white 0%, $light-grey 100%);
+$black: #000;
+$black-gradient: linear-gradient(120deg, $dark-grey 0%, $black 100%);
+$dark: #393a3e;
+$dark-gradient: linear-gradient(120deg, #575770 0%, $dark 100%);
+
+// Extras
+
+$shadow-xs: 2px 2px 4px $shadow-color, -2px -2px 4px $white;
+$shadow-sm: 4px 4px 8px $shadow-color, -4px -4px 8px $white;
+$shadow: 6px 6px 12px $shadow-color, -6px -6px 12px $white;
+$shadow-lg: 8px 8px 16px $shadow-color, -8px -8px 16px $white;
+$shadow-xl: 10px 10px 20px $shadow-color, -10px -10px 20px $white;
+$shadow-inset-xs: inset 1px 1px 3px $shadow-color, inset -2px -2px 5px $white;
+$shadow-inset-sm: inset 2px 2px 5px $shadow-color, inset -3px -3px 7px $white;
+$shadow-inset: inset 4px 4px 9px $shadow-color, inset -6px -6px 13px $white;
+$shadow-inset-lg: inset 6px 6px 13px $shadow-color, inset -8px -8px 17px $white;
+$shadow-inset-xl: inset 8px 8px 17px $shadow-color, inset -10px -10px 21px $white;
+
+// Social Colors
+
+$facebook: #4e68a1;
+$facebook-dark: #3b4f7a;
+$twitter: #65b5f2;
+$twitter-dark: #5294c6;
+$linkedin: #2083bc;
+$linkedin-dark: #186592;
+$pinterest: #d2373b;
+$pinterest-dark: #ad2c2f;
+$dribbble: #ec5f94;
+$dribbble-dark: #b4446e;
+$instagram: #4c5fd7;
+$instagram-dark: #4252ba;
+$vimeo: #1ab7ea;
+$vimeo-dark: #0d91bc;
+$youtube: #e52d27;
+$youtube-dark: #b31217;
+$dropbox: #3d9ae8;
+$dropbox-dark: #2777bb;
+$behance: #053eff;
+$behance-dark: #062fbb;
+$skype: #00aff0;
+$skype-dark: #068bbd;
+$tumblr: #34526f;
+$tumblr-dark: #172635;
+$github: #333;
+$github-dark: #111;
+$reddit: #ff4500;
+$reddit-dark: #c13400;

@@ -3,8 +3,12 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Length
 
 
+#############################################################
+#USER FORMS
+#############################################################
+
 class AddUserForm(FlaskForm):
-    """Form for adding users."""
+    """Form for adding new users"""
 
     fullname = StringField('Full Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
@@ -14,14 +18,14 @@ class AddUserForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    """Login form."""
+    """User Login form"""
 
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[Length(min=6)])
 
 
 class UserUpdateForm(FlaskForm):
-    """Form for updating user profile."""
+    """Form for updating user profile"""
 
     fullname = StringField('Full Name', validators=[DataRequired()])
     username = StringField('Username')

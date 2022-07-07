@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, flash, redirect, session
 from sqlalchemy.exc import IntegrityError
 # from forms import UserAddForm, LoginForm, UserUpdateForm
-from project.models.user_model import db, connect_db, User
+from models.user_model import db, connect_db, User
 import requests
 from api_keys import GOOGLE_API_KEY
 
