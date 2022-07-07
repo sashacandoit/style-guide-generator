@@ -22,34 +22,27 @@ class UserFontStyle(db.Model):
         nullable=False
     )
 
-    user = db.relationship('User', backref='font_styles')
+    user = db.relationship('User', backref='user_font_styles')
 
 
     font_family = db.Column(
         db.Text,
-        # db.ForeignKey('api_font_styles.font_family')
+        db.ForeignKey('api_font_styles.font_family')
     )
 
-    font_weight = db.Column(
-        db.Integer,
-        # db.ForeignKey('api_font_styles.font_weight')
-    )
-
-    __table_args__ = (ForeignKeyConstraint(
-        [font_family, font_weight],
-        [APIFontStyle.font_family, APIFontStyle.font_weight]
-    ))
-
-    font_style = db.Column(
+    font_variant = db.Column(
         db.Text,
-        nullable=False,
-        default=None
+        db.ForeignKey('api_font_styles.variant')
     )
 
-    font_transform = db.Column(
-        db.Text,
-        nullable=False,
-        default=None
+    # __table_args__ = (ForeignKeyConstraint(
+    #     [font_family, font_variant],
+    #     [APIFontStyle.font_family, APIFontStyle.variant]
+    # ))
+
+    uppercase = db.Column(
+        db.Boolean,
+        default=False
     )
 
     font_size = db.Column(
