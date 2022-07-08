@@ -8,20 +8,23 @@
     <meta name="description" content="Soft UI - Neumorphism Style UI Kit">
     <meta name="author" content="kingstudio.ro">
     <!-- Favicon -->
-    <link rel="icon" href="../assets/images/favicon.png">
+    <link rel="icon" href="/static/images/favicon.png">
     <!-- Site Title -->
     <title>Style Guide Generator</title>
     <!-- Bootstrap 4 core CSS -->
 
-
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="../assets/css/animate.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap">
-    <link  rel="stylesheet" href="../assets/css/fontawesome-all.min.css" type="text/css">
+    <link  rel="stylesheet" href="/static/css/fontawesome-all.min.css" type="text/css">
+
+    <script src="https://kit.fontawesome.com/d14a6789f5.js" crossorigin="anonymous"></script>
+
+    
 </head>
 
 <body>
@@ -33,29 +36,75 @@
         </div>
     </div>
 
-    <div class="container">
-        <h1 class="h1">Style Guide Generator</h1>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light custom-menu menu-pills bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Style Guide Maker</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggle-pills">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home mr-5"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-user mr-5"></i>
+                            <span>Account</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt mr-5"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span>Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span>Sign Up</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    
+    </nav>
 
     {% block content %}
     {% endblock %}
 
+    <div class="container">
+    </div>
+
+    
+
 
 
     <!-- core JavaScript -->
-    <script src="../assets/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- preloader -->
-    <script src="../assets/js/preloader.js"></script>
+    <script src="/static/js/preloader.js"></script>
 
     <!-- smooth scroll -->
-    <script src="../assets/js/jquery.easing.min.js"></script>
-    <script src="../assets/js/smooth-scroll.js"></script>
+    <script src="/static/js/jquery.easing.min.js"></script>
+    <script src="/static/js/smooth-scroll.js"></script>
 
     <!-- hide nav -->
-    <script src="../assets/js/hide-nav.js"></script>
+    <script src="/static/js/hide-nav.js"></script>
 
     <!-- tooltips -->
     <script>
