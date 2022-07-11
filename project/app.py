@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from forms import AddUserForm, LoginForm, UpdateUserForm
 from models import db, connect_db, User, APIFontStyle
-import requests
-from api_keys import GOOGLE_API_KEY
+from sqlalchemy.exc import IntegrityError
+# from api_keys import GOOGLE_API_KEY
 
 app = Flask(__name__)
 
@@ -16,22 +16,15 @@ connect_db(app)
 
 
 
-
-
-# res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
-
-# data = res.json()
-
-# for item in data['items']:
-#     print(item['family'], item['variants'])
-
+#############################################################
+# USER ROUTES
+#############################################################
 
 @app.route('/')
 def home_page():
     """Render home page"""
     
-    return render_template("home.html")
-
+    return render_template("user_profile.html")
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -46,10 +39,21 @@ def register_user():
         new_user = User.register(full_name, username, email,  password)
 
         db.session.add(new_user)
-        db.session.commit()
+        
+        try:
+            db.session.commit()
+        except IntegrityError:
+            form.username.errors.append('Username already in use')
+            return render_template('register.html', form=form)
 
-        session['user_id'] = new_user.id
-        flash('Welcome! Successfully created your account!')
+        try:
+            db.session.commit()
+        except IntegrityError:
+            form.email.errors.append('Email address already taken')
+            return render_template('register.html', form=form)
+
+        session['username'] = new_user.username
+        flash('Welcome to the party! Successfully created your account!')
         return redirect('/')
         
     else:
@@ -71,7 +75,7 @@ def login_user():
         #Check if use passes authentication:
         if user:
             flash(f"Welcome Back, {user.full_name}!", "primary")
-            session['user_id'] = user.id
+            session['username'] = user.username
             return redirect('/')
           
         else:
@@ -86,3 +90,16 @@ def logout_user():
     session.pop('user_id')
     flash("See you soon!", "info")
     return redirect('/login')
+
+
+
+@app.route('/users/<username>')
+def show_tweets(username):
+    
+    if username != session['username'] or "username" not in session:
+        flash("Please login first!")
+        return redirect('/login')
+        
+    user = User.query.get(username)
+
+    return render_template('user_profile.html', user=user)

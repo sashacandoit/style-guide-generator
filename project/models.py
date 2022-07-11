@@ -17,8 +17,6 @@ def connect_db(app):
     db.init_app(app)
 
 
-
-
     
 class User(db.Model):
 
@@ -51,11 +49,19 @@ class User(db.Model):
         nullable=False,
     )
 
-    style_guides = db.relationship('StyleGuide', backref='user')
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow()
+    )
 
-    user_font_styles = db.relationship('UserFontStyle',     backref='user')
 
-    color_schemes = db.relationship('ColorScheme', backref='user')
+    user_font_styles = db.relationship('UserFontStyle')
+
+    # color_schemes = db.relationship('ColorScheme', backref='user')
+
+    # style_guides = db.relationship('StyleGuide', backref='user')
+
 
 
     def __repr__(self):
@@ -125,55 +131,59 @@ class APIFontStyle(db.Model):
         db.Text
     )
 
-    # user_font_styles = db.relationship('UserFontStyle', backref='api_font')
 
 
+class UserFontStyle(db.Model):
 
-# class UserFontStyle(db.Model):
+    ___tablename__ = 'user_font_styles'
+    
 
-#     ___tablename__ = 'user_font_styles'
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
 
-#     id = db.Column (
-#         db.Integer,
-#         primary_key=True,
-#         autoincrement=True
-#     )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id', ondelete='CASCADE'),
+        nullable=False
+    )
 
-#     user_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('users.id', ondelete='CASCADE'),
-#         nullable=False
-#     )
+    user = db.relationship('User')
 
-#     api_font_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('api_font_styles.id'),
-#         nullable=False
-#     )
+    api_font_id = db.Column(
+        db.Integer,
+        db.ForeignKey('api_font_style.id'),
+        nullable=False
+    )
 
-#     uppercase = db.Column(
-#         db.Boolean,
-#         default=False
-#     )
+    api_font_style = db.relationship('APIFontStyle')
 
-#     font_size = db.Column(
-#         db.Integer,
-#         nullable=False,
-#         default=16
-#     )
+    uppercase = db.Column(
+        db.Boolean,
+        default=False
+    )
 
-#     font_color = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default="primary"
-#     ) # Should this reference the color_schemes table?
+    font_size = db.Column(
+        db.Integer,
+        nullable=False,
+        default=16
+    )
+
+    font_color = db.Column(
+        db.Text,
+        nullable=False,
+        default="primary"
+    ) # Should this reference the color_schemes table?
+    # can also make it a select?
 
 
-#     timestamp = db.Column(
-#         db.DateTime,
-#         nullable=False,
-#         default=datetime.utcnow()
-#     )
+    timestamp = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.utcnow()
+    )
 
 
 
