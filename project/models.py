@@ -26,7 +26,7 @@ class User(db.Model):
         db.Text,
         primary_key=True,
         nullable=False,
-        unique=True,
+        unique=True
     )
 
     full_name = db.Column(
@@ -63,7 +63,7 @@ class User(db.Model):
 
 
     @classmethod
-    def register(cls, full_name, username, email, password):
+    def register(cls, username, full_name, email, password):
         """
         Sign up user.
         Hashes password and adds user to system.
@@ -102,7 +102,8 @@ class APIFontStyle(db.Model):
 
     id = db.Column(
         db.Integer,
-        primary_key=True
+        primary_key=True,
+        autoincrement=True
     )
 
     font_family = db.Column(
