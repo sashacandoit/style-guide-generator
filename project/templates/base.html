@@ -45,8 +45,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar-toggle-pills">
                 <ul class="navbar-nav ml-auto">
+                    {% if session['username'] %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">
+                        <a class="nav-link" href="/">
                             <i class="fas fa-home mr-5"></i>
                             <span>Home</span>
                         </a>
@@ -64,6 +65,7 @@
                         </a>
                     </li>
 
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="/login">
                             <span>Login</span>
@@ -74,6 +76,7 @@
                             <span>Sign Up</span>
                         </a>
                     </li>
+                    {% endif %}
 
                 </ul>
             </div>

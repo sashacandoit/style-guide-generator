@@ -4,7 +4,7 @@
 
 <section class="lg">
     <div class="container">
-        <div class="box-w-image promo-box pl-45 pr-45 mb-0">
+        <div class="promo-box pl-45 pr-45 mb-0">
             <div class="row">
                 <div class="col-md-6 col-md-offset-5">
                     <div class="box-description pl-15 p-y-20">
@@ -12,32 +12,35 @@
                         <p class=""><span class="text-primary">Username:</span> {{ user.username }}</p>
                         <p class="mb-30"><span class="text-primary">Member Since:</span> {{ user.timestamp }}</p>
 
-                        <form method="POST" action="/users/{{user.username}}/delete">
-                            {{ form.hidden_tag() }}
-                            <a href="/logout" class="btn btn-secondary">Logout</a>
-                            <button class="btn btn-outline-danger mx-3">Delete User</button>
-                        </form>
                         
                     </div><!-- / box-description -->
-                    <div class="row">
-                        <div class="col-md-6 mb-30">
-                            <i class="fas fa-layer-group fs-40 d-inline-block va-middle m-5 mr-20 text-primary"></i>
-                            <div class="d-inline-block va-middle">
-                                <h4 class="timer mb-0 va-middle" id="count-one" data-to="27" data-speed="1500">27
-                                </h4>
-                                <p class="mb-0 text-sm text-primary">Style Guides</p>
-                            </div><!-- / d-inline-block -->
-                        </div><!-- / column -->
-                    </div>
+                    
+                    <form method="POST" action="/users/{{user.username}}/delete">
+                        {{ form.hidden_tag() }}
+                        <a href="/logout" class="btn btn-primary pill m-10">Logout</a>
+                        <button class="btn btn-danger pill m-10 mx-3">Delete User</button>
+                    </form>
+
                 </div><!-- / column -->
 
                 <div class="col-md-6 col-md-offset-5">
                     <div class="box-description pl-15 p-y-20">
                         <div class="row">
                             <div class="col-md mb-30">
-                                <a href="" class="btn btn-primary pill m-10 ml-0">
-                                    <i class="fas fa-plus mr-5"></i>
-                                    Make A New Style Guide</a>
+                                <div class="row">
+                                    <div class="col-md-6 mx-auto text-center">
+                                        <i class="fas fa-layer-group fs-40 d-inline-block va-middle m-5 mr-20 text-primary"></i>
+                                        <div class="d-inline-block va-middle">
+                                            <h4 class="timer mb-0 va-middle" id="count-one" data-to="27" data-speed="1500">27
+                                            </h4>
+                                            <p class="mb-0 text-sm text-primary">Style Guides</p>
+                                        </div><!-- / d-inline-block -->
+                                        <a href="" class="mt-30 btn btn-lg btn-primary pill m-10 ml-0">
+                                            <i class="fas fa-plus mr-5"></i>
+                                            Make A New Style Guide</a>
+                                    </div><!-- / column -->
+                                </div>
+                                
                             </div><!-- / column -->
                         </div>
                     </div><!-- / box-description -->
@@ -45,6 +48,54 @@
             </div><!-- / row -->
         </div><!-- box-w-image -->
     </div><!-- / container -->
+</section>
+
+<section class="big">
+    <div class="container">
+        <ul class="row portfolio list-unstyled mb-0">
+            <!-- style guide -->
+            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
+                <div class="card">
+                    <div class="card-body p-y-30 text-center">
+                        <img class="img-responsive mb-20" src="../static/images/placeholder-mini.jpg" alt="">
+                        <a href="" class="card-title title-link primary-hover fs-20">Style Guide 1</a>
+                        <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
+                            lacus...
+                        </p>
+                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
+                    </div><!-- / card-body -->
+                </div><!-- / card -->
+            </li><!-- / style guide -->
+        
+            <!-- style guide -->
+            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
+                <div class="card">
+                    <div class="card-body p-y-30 text-center">
+                        <img class="img-responsive mb-20" src="../../static/images/placeholder-mini.jpg" alt="">
+                        <a href="#x" class="card-title title-link primary-hover fs-20">Style Guide 2</a>
+                        <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
+                            lacus...
+                        </p>
+                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
+                    </div><!-- / card-body -->
+                </div><!-- / card -->
+            </li><!-- / style guide -->
+        
+            <!-- style guide -->
+            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
+                <div class="card">
+                    <div class="card-body p-y-30 text-center">
+                        <img class="img-responsive mb-20" src="../static/images/placeholder-mini.jpg" alt="">
+                        <a href="#x" class="card-title title-link primary-hover fs-20">Style Guide 3</a>
+                        <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
+                            lacus...
+                        </p>
+                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
+                    </div><!-- / card-body -->
+                </div><!-- / card -->
+            </li><!-- / style guide -->
+        </ul>
+    </div>
 </section>
 
 
