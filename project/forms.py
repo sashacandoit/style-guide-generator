@@ -12,8 +12,8 @@ import email_validator
 class AddUserForm(FlaskForm):
     """Form for adding new users"""
 
-    full_name = StringField('Full Name', validators=[DataRequired()])
     username = StringField('Username', validators=[DataRequired()])
+    full_name = StringField('Full Name', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[Length(min=6)])
 
@@ -28,8 +28,12 @@ class LoginForm(FlaskForm):
 class UpdateUserForm(FlaskForm):
     """Form for updating user profile"""
 
-    fullname = StringField('Full Name', validators=[DataRequired()])
     username = StringField('Username')
+    fullname = StringField('Full Name', validators=[DataRequired()])
     email = StringField('E-mail', validators=[Email()])
     
     password = PasswordField('Current Password')
+
+
+class DeleteForm(FlaskForm):
+    """Intentionally blank"""

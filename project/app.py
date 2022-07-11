@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, session
-from forms import AddUserForm, LoginForm, UpdateUserForm
+from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm
 from models import db, connect_db, User, APIFontStyle
 from sqlalchemy.exc import IntegrityError
 # from api_keys import GOOGLE_API_KEY
@@ -106,5 +106,26 @@ def show_user(username):
         return redirect('/login')
         
     user = User.query.get(username)
+    form = DeleteForm()
 
-    return render_template('user_profile.html', user=user)
+    return render_template('user_profile.html', user=user, form=form)
+
+
+@app.route('/users/<username>/delete', methods=["GET", "POST"])
+def delete_user(username):
+    """Delete current user in session"""
+
+    user = User.query.get_or_404(username)
+        
+    if username != session['username'] or "username" not in session:
+        # flash('Sorry, you are not authorized to view that page')
+        return redirect('/')
+        
+    form = DeleteForm()
+    if form.validate_on_submit():
+        db.session.delete(user)
+        db.session.commit()
+        session.pop("username")
+
+    flash("User Deleted!", "info")
+    return redirect('/')
