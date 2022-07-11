@@ -22,20 +22,15 @@ class User(db.Model):
 
     ___tablename__ = 'users'
 
-    id = db.Column (
-        db.Integer,
+    username = db.Column(
+        db.Text,
         primary_key=True,
-        autoincrement=True
+        nullable=False,
+        unique=True,
     )
 
     full_name = db.Column(
         db.Text
-    )
-
-    username = db.Column(
-        db.Text,
-        nullable=False,
-        unique=True,
     )
 
     email = db.Column(
@@ -56,7 +51,7 @@ class User(db.Model):
     )
 
 
-    user_font_styles = db.relationship('UserFontStyle')
+    user_font_styles = db.relationship('UserFontStyle', backref='user')
 
     # color_schemes = db.relationship('ColorScheme', backref='user')
 
@@ -65,7 +60,7 @@ class User(db.Model):
 
 
     def __repr__(self):
-        return f"<User #{self.id}: {self.full_name}, {self.username}, {self.email}>"
+        return f"<Username {self.username}: {self.full_name}, {self.timestamp}, {self.email}>"
 
 
     @classmethod
@@ -78,8 +73,8 @@ class User(db.Model):
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
 
         user = User(
-            full_name=full_name,
             username=username,
+            full_name=full_name,
             email=email,
             password=hashed_pwd
         )
@@ -144,13 +139,11 @@ class UserFontStyle(db.Model):
         autoincrement=True
     )
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('user.id', ondelete='CASCADE'),
+    username = db.Column(
+        db.Text,
+        db.ForeignKey('user.username', ondelete='CASCADE'),
         nullable=False
     )
-
-    user = db.relationship('User')
 
     api_font_id = db.Column(
         db.Integer,
@@ -176,7 +169,7 @@ class UserFontStyle(db.Model):
         nullable=False,
         default="primary"
     ) # Should this reference the color_schemes table?
-    # can also make it a select?
+    # can also make it a select in form
 
 
     timestamp = db.Column(

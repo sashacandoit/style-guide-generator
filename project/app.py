@@ -37,24 +37,19 @@ def register_user():
     form = AddUserForm()
 
     if form.validate_on_submit():
-        full_name = form.full_name.data
         username = form.username.data
+        full_name = form.full_name.data
         email = form.email.data
         password = form.password.data
-        new_user = User.register(full_name, username, email,  password)
+        new_user = User.register(username, full_name, email,  password)
 
         db.session.add(new_user)
         
         try:
             db.session.commit()
+
         except IntegrityError:
             form.username.errors.append('Username already in use')
-            return render_template('register.html', form=form)
-
-        try:
-            db.session.commit()
-        except IntegrityError:
-            form.email.errors.append('Email address already taken')
             return render_template('register.html', form=form)
 
         session['username'] = new_user.username
@@ -97,7 +92,7 @@ def login_user():
 
 @app.route('/logout')
 def logout_user():
-    session.pop('user_id')
+    session.pop('username')
     flash("See you soon!", "info")
     return redirect('/login')
 
@@ -111,6 +106,5 @@ def show_user(username):
         return redirect('/login')
         
     user = User.query.get(username)
-    #Need to change all of these to user.id
 
     return render_template('user_profile.html', user=user)
