@@ -8,9 +8,9 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-5">
                     <div class="box-description pl-15 p-y-20">
-                        <h3 class="mb-30 fw-bold"><span class="text-primary">Sasha</span> Czerniawski</h3>
-                        <p class=""><span class="text-primary">Username:</span> sashacandoit</p>
-                        <p class="mb-30"><span class="text-primary">Member Since:</span> May 31, 2022</p>
+                        <h3 class="mb-30 fw-bold"><span class="text-primary">Hi</span> {{ user.full_name }}</h3>
+                        <p class=""><span class="text-primary">Username:</span> {{ user.username }}</p>
+                        <p class="mb-30"><span class="text-primary">Member Since:</span> {{ user.timestamp }}</p>
                     </div><!-- / box-description -->
                     <div class="row">
                         <div class="col-md-6 mb-30">
@@ -28,7 +28,7 @@
                     <div class="box-description pl-15 p-y-20">
                         <div class="row">
                             <div class="col-md mb-30">
-                                <a href="/register" class="btn btn-primary pill m-10 ml-0">
+                                <a href="" class="btn btn-primary pill m-10 ml-0">
                                     <i class="fas fa-plus mr-5"></i>
                                     Make A New Style Guide</a>
                             </div><!-- / column -->

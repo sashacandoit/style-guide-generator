@@ -24,11 +24,16 @@ connect_db(app)
 def home_page():
     """Render home page"""
     
-    return render_template("user_profile.html")
+    return redirect('/login')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
+
+    if "username" in session:
+        return redirect(f"users/{session['username']}")
+
+
     form = AddUserForm()
 
     if form.validate_on_submit():
@@ -54,7 +59,7 @@ def register_user():
 
         session['username'] = new_user.username
         flash('Welcome to the party! Successfully created your account!')
-        return redirect('/')
+        return redirect(f"users/{session['username']}")
         
     else:
         return render_template('register.html', form=form)
@@ -64,6 +69,11 @@ def register_user():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
+
+    if "username" in session:
+        return redirect(f"users/{session['username']}")
+
+
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -94,12 +104,13 @@ def logout_user():
 
 
 @app.route('/users/<username>')
-def show_tweets(username):
+def show_user(username):
     
     if username != session['username'] or "username" not in session:
         flash("Please login first!")
         return redirect('/login')
         
     user = User.query.get(username)
+    #Need to change all of these to user.id
 
     return render_template('user_profile.html', user=user)
