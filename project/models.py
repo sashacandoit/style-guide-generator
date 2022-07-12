@@ -5,6 +5,8 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 import webcolors 
 from webcolors import name_to_rgb, hex_to_rgb
+import requests
+from api_keys import GOOGLE_API_KEY
 
 db = SQLAlchemy()
 
@@ -127,20 +129,40 @@ class APIFontStyle(db.Model):
         db.Text
     )
 
-    # @classmethod
-    # def add_font_data(cls, font_family, variant, category):
-    #     """
-    #     Adds font api data to the APIFontStyles table
-    #     """
+    @classmethod
+    def gen_font_data(cls, font_family, variant, category):
+        """
+        Adds font api data to the APIFontStyles table
+        """
+
+        font_style = APIFontStyle(
+            font_family=font_family,
+            variant=variant,
+            category=category
+        )
+
+        return font_style
 
 
-    #     api_font = APIFontStyle(
-    #         font_family=font_family,
-    #         variant=variant,
-    #         category=category
-    #     )
+def add_api_data():
+    res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
 
-    #     return api_font
+    data = res.json()
+
+    for item in data['items']:
+        font_family = item['family']
+        category = item['category']
+        
+        for variant in item['variants']:
+            variant = variant
+            font = dict(font_family=font_family, variant=variant, category=category)
+            print(font)
+
+            # api_font_style = APIFontStyle(font)
+            api_font_style = APIFontStyle.gen_font_data(font_family, variant, category)
+            
+            db.session.add(api_font_style)
+            db.session.commit()
 
 
 

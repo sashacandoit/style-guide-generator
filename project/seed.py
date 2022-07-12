@@ -1,5 +1,5 @@
 from app import app
-from models import db, User
+from models import db, User, APIFontStyle
 
 db.drop_all()
 db.create_all()
@@ -20,5 +20,6 @@ user2 = User(
 
 db.session.add_all([user1, user2])
 db.session.commit()
+
 
 # Should I add my API fonts to the API Font table from here?
