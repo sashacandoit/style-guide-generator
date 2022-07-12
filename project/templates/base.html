@@ -84,6 +84,21 @@
     
     </nav>
 
+    <div class="container">
+
+        <div class="row">
+            <div class="col-4">
+                {% for msg in get_flashed_messages() %}
+                <div class="alert alert-primary fade show">
+                    {{ msg }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-8"></div>
+        </div>
+
+    </div>
+
     {% block content %}
     {% endblock %}
 

@@ -26,19 +26,20 @@
                             <i class="fas fa-user promo-icon text-primary"></i>
                         </div>
                         <p class="text-center fs-24 fw-bold mb-30 text-primary">Login</p>
-                        <form class="validation-inner" id="login-form4" novalidate="novalidate">
-                            <div class="form-group">
-                                <input type="email" class="form-control pill mb-10" name="usernameLogin4"
-                                    placeholder=" Email"
-                                    style="font-family:'Font Awesome 5 Free', sans-serif !important; font-weight: 400">
-                            </div>
 
+                        <form method="POST" class="validation-inner" id="login-form4" novalidate="novalidate">
+
+                            {{ form.hidden_tag() }}
+                            
+                            {% for field in form
+                            if field.widget.input_type != 'hidden' %}
+                            
                             <div class="form-group">
-                                <input type="password" class="form-control pill mb-10" name="passwordLogin4"
-                                    placeholder=" Password" required=""
-                                    style="font-family:'Font Awesome 5 Free', sans-serif !important; font-weight: 400"
-                                    aria-required="true">
+                            
+                                {{ field(class_="form-control pill mb-10", placeholder=field.label.text) }}
+                            
                             </div>
+                            {% endfor %}
 
                             <button type="submit" class="btn btn-primary pill d-block w-100 mb-15">
                                 <i class="fas fa-sign-in-alt mr-5"></i>

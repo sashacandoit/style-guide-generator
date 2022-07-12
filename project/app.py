@@ -12,7 +12,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'somethingsecret'
 
 connect_db(app)
-# db.create_all()
 
 
 
@@ -49,7 +48,7 @@ def register_user():
             db.session.commit()
 
         except IntegrityError:
-            form.username.errors.append('Username already in use')
+            form.username.errors.append('Username already in use', 'warning')
             return render_template('register.html', form=form)
 
         session['username'] = new_user.username
@@ -79,7 +78,7 @@ def login_user():
         
         #Check if use passes authentication:
         if user:
-            flash(f"Welcome Back, {user.full_name}!", "primary")
+            flash(f"Welcome Back, {user.full_name}!")
             session['username'] = user.username
             return redirect('/')
           
@@ -93,7 +92,7 @@ def login_user():
 @app.route('/logout')
 def logout_user():
     session.pop('username')
-    flash("See you soon!", "info")
+    flash("See you soon!", "primary")
     return redirect('/login')
 
 
@@ -102,13 +101,14 @@ def logout_user():
 def show_user(username):
     
     if username != session['username'] or "username" not in session:
-        flash("Please login first!")
+        flash("Sorry, you are not authorized to view that page")
         return redirect('/login')
         
     user = User.query.get(username)
     form = DeleteForm()
 
     return render_template('user_profile.html', user=user, form=form)
+
 
 
 @app.route('/users/<username>/delete', methods=["GET", "POST"])
@@ -118,7 +118,7 @@ def delete_user(username):
     user = User.query.get_or_404(username)
         
     if username != session['username'] or "username" not in session:
-        # flash('Sorry, you are not authorized to view that page')
+        flash('Sorry, you are not authorized to view that page')
         return redirect('/')
         
     form = DeleteForm()
@@ -127,5 +127,5 @@ def delete_user(username):
         db.session.commit()
         session.pop("username")
 
-    flash("User Deleted!", "info")
+    flash("User Deleted!")
     return redirect('/')
