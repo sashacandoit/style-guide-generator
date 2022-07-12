@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, flash, redirect, session
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm
 from models import db, connect_db, User, APIFontStyle
 from sqlalchemy.exc import IntegrityError
-# from api_keys import GOOGLE_API_KEY
+import requests
+from api_keys import GOOGLE_API_KEY
 
 app = Flask(__name__)
 
@@ -129,3 +130,29 @@ def delete_user(username):
 
     flash("User Deleted!")
     return redirect('/')
+
+
+
+#############################################################
+# STYLE GUIDE ROUTES
+#############################################################
+
+
+
+res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+
+data = res.json()
+
+for item in data['items']:
+    font_family = item['family']
+    category = item['category']
+    # How to I get it to pull all individual variants for the font family?
+    for variant in item['variants']:
+        variant = variant
+        font = dict(font_family=font_family, variant=variant, category=category)
+        print(font)
+
+    api_font_style = APIFontStyle(font)
+    db.session.add(api_font_style)
+    db.session.commit()
+

@@ -127,6 +127,21 @@ class APIFontStyle(db.Model):
         db.Text
     )
 
+    # @classmethod
+    # def add_font_data(cls, font_family, variant, category):
+    #     """
+    #     Adds font api data to the APIFontStyles table
+    #     """
+
+
+    #     api_font = APIFontStyle(
+    #         font_family=font_family,
+    #         variant=variant,
+    #         category=category
+    #     )
+
+    #     return api_font
+
 
 
 class UserFontStyle(db.Model):
