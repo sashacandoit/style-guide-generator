@@ -10,7 +10,7 @@
                     <div class="box-description pl-15 p-y-20">
                         <h3 class="mb-30 fw-bold"><span class="text-primary">Hi</span> {{ user.full_name }}</h3>
                         <p class=""><span class="text-primary">Username:</span> {{ user.username }}</p>
-                        <p class="mb-30"><span class="text-primary">Member Since:</span> {{ user.timestamp }}</p>
+                        <p class="mb-30"><span class="text-primary">Member Since:</span> {{ user.timestamp.strftime("%B %d, %Y") }}</p>
 
                         
                     </div><!-- / box-description -->

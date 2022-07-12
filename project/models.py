@@ -17,6 +17,7 @@ def connect_db(app):
     db.init_app(app)
 
 
+
     
 class User(db.Model):
 
@@ -351,3 +352,9 @@ class UserFontStyle(db.Model):
 #     )
 
 
+
+
+# def format_datetime():
+#     date_time = datetime.utcnow()
+#     format_date = date_time.strftime("%d %B, %Y")
+#     return format_date
