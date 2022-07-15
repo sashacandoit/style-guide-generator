@@ -137,7 +137,7 @@ def delete_user(username):
 #############################################################
 
 
-
-
-    
+@app.route('/style-guide')
+def view_style_guide():
+    return render_template('style_guide.html')
 

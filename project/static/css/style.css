@@ -1,5 +1,26 @@
 /*---------- custom styling ----------*/
 
+/*-- style guide --*/
+
+.sg-colors-row {
+    min-height: 200px;
+}
+
+.sg-color-block {
+    height: 100px;
+}
+
+.primary-typeface {
+    font-size: 72px;
+}
+
+.typeface-weight {
+    font-size: 62px;
+}
+
+.typesetting-display {
+    font-size: 60px;
+}
 
 /*---------- ui ----------*/
 .color-box {
