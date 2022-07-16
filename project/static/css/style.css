@@ -2,6 +2,8 @@
 
 /*-- style guide --*/
 
+/* color scheme */
+
 .color-scheme-row {
     min-height: 200px;
 }
@@ -10,12 +12,18 @@
     height: 100px;
 }
 
+/* typeface */
 .primary-typeface {
     font-size: 72px;
 }
 
 .typeface-weight {
     font-size: 62px;
+}
+
+/* typesetting */
+.ts-body, .ts-link {
+    font-size: 16px;
 }
 
 .spacer-40 {
@@ -42,6 +50,7 @@
     margin-right: 20px;
 }
 
+/* buttons */
 .sg-dark-btn {
     height: 50px;
     width: 200px;
@@ -71,12 +80,20 @@
 }
 
 .sg-btn-pressed {
-    filter: brightness(0.6);
+    filter: brightness(0.7);
 }
 
 .sg-btn-deact {
     filter: opacity(25%);
 }
+
+/* splash sample */
+
+.section-sample-box {
+    background-color: #f5f7fe40 !important;
+}
+
+/* body sample */
 
 
 /*---------- ui ----------*/
