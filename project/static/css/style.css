@@ -2,11 +2,11 @@
 
 /*-- style guide --*/
 
-.sg-colors-row {
+.color-scheme-row {
     min-height: 200px;
 }
 
-.sg-color-block {
+.color-scheme-block {
     height: 100px;
 }
 
@@ -40,6 +40,42 @@
     border-radius: 14px;
     background-color: black;
     margin-right: 20px;
+}
+
+.sg-dark-btn {
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.sg-light-btn {
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.sg-dark-btn span {
+    margin-bottom: 0;
+    color: white;
+}
+
+.sg-light-btn span {
+    margin-bottom: 0;
+    color: black;
+}
+
+.sg-btn-pressed {
+    filter: brightness(0.6);
+}
+
+.sg-btn-deact {
+    filter: opacity(25%);
 }
 
 
