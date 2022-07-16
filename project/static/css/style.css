@@ -3,7 +3,6 @@
 /*-- style guide --*/
 
 /* color scheme */
-
 .color-scheme-row {
     min-height: 200px;
 }
@@ -87,13 +86,12 @@
     filter: opacity(25%);
 }
 
-/* splash sample */
+/* section samples */
 
 .section-sample-box {
     background-color: #f5f7fe40 !important;
 }
 
-/* body sample */
 
 
 /*---------- ui ----------*/
