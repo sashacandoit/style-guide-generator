@@ -183,31 +183,30 @@ class UserFontStyle(db.Model):
         nullable=False
     )
 
-    api_font_id = db.Column(
-        db.Integer,
-        db.ForeignKey('api_font_style.id'),
-        nullable=False
+    api_font_family = db.Column(
+        db.Text,
+        db.ForeignKey('api_font_style.font_family')
+    )
+
+    api_font_variant = db.Column(
+        db.Text,
+        db.ForeignKey('api_font_style.variant')
     )
 
     api_font_style = db.relationship('APIFontStyle')
 
-    uppercase = db.Column(
-        db.Boolean,
-        default=False
+
+    text_transform = db.Column(
+        db.Text
     )
 
-    font_size = db.Column(
-        db.Integer,
-        nullable=False,
-        default=16
+    text_size = db.Column(
+        db.Integer
     )
 
     font_color = db.Column(
-        db.Text,
-        nullable=False,
-        default="primary"
-    ) # Should this reference the color_schemes table?
-    # can also make it a select in form
+        db.Text
+    ) 
 
 
     timestamp = db.Column(

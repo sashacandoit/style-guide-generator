@@ -1,6 +1,8 @@
+from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Email, Length
+from wtforms import StringField, PasswordField, SelectField, IntegerField
+from wtforms.validators import DataRequired, Email, Length, NumberRange
+from wtforms_html5 import ColorInput
 import email_validator
 
 
@@ -37,3 +39,38 @@ class UpdateUserForm(FlaskForm):
 
 class DeleteForm(FlaskForm):
     """Intentionally blank"""
+
+
+
+#############################################################
+#STYLE GUIDE FORMS
+#############################################################
+
+class ColorSchemeForm(FlaskForm):
+    """Form for defining user's color scheme for style guide"""
+
+    primary_dark = StringField('Primary Dark', widget=ColorInput())
+    primary_light = StringField('Primary Light', widget=ColorInput())
+    accent_1 = StringField('Accent 1', widget=ColorInput())
+    accent_2 = StringField('Accent 2', widget=ColorInput())
+
+
+
+class TypesettingForm(FlaskForm):
+    """
+    Form for defining typeface and typesetting for style guide 
+    """
+
+    primary_typeface = SelectField('primary_typeface', choices=[])
+    variant = SelectField('variant', choices=[])
+    text_size = IntegerField('Text Size', validators=[
+        NumberRange(min=10, max=110)
+            ])
+    text_color = SelectField('hex_code', choices=[])
+    test_transform = SelectField('text-transform', choices=[
+        ('none', 'None'), 
+        ('uppercase', 'UPPERCASE'), 
+        ('capitalize', 'Capitalize'), 
+        ('lowercase', 'lowercase')])
+
+    
