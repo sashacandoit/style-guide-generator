@@ -166,6 +166,33 @@ def add_api_data():
 
 
 
+class UserTypefaces(db.Model):
+    __tablename__ = 'user_typefaces'
+
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    style_guide_id = db.Column(
+        db.Integer,
+        db.ForiegnKey('style_guide.id')
+    )
+
+    style_guide = db.relationship('StyleGuides')
+
+    font_family = db.Column(
+        db.Text
+    )
+
+    variant = db.Column(
+        db.Text
+    )
+
+
+
+
 class UserFontStyle(db.Model):
 
     ___tablename__ = 'user_font_styles'
@@ -177,33 +204,109 @@ class UserFontStyle(db.Model):
         autoincrement=True
     )
 
-    username = db.Column(
+    style_guide_id = db.Column(
+        db.Integer,
+        db.ForiegnKey('style_guide.id')
+    )
+
+    style_guide = db.relationship('StyleGuides')
+
+    font_family = db.Column(
         db.Text,
-        db.ForeignKey('user.username', ondelete='CASCADE'),
-        nullable=False
+        db.ForeignKey('user_typeface.font_family')
     )
 
-    api_font_family = db.Column(
+    font_variant = db.Column(
         db.Text,
-        db.ForeignKey('api_font_style.font_family')
+        db.ForeignKey('user_typeface.variant')
     )
 
-    api_font_variant = db.Column(
-        db.Text,
-        db.ForeignKey('api_font_style.variant')
-    )
-
-    api_font_style = db.relationship('APIFontStyle')
-
-
-    text_transform = db.Column(
-        db.Text
-    )
+    user_typeface = db.relationship('UserTypeface')
 
     text_size = db.Column(
         db.Integer
     )
 
+    text_transform = db.Column(
+        db.Text, 
+        default=None
+    )
+
+
+
+class StyleGuide(db.Model):
+
+    ___tablename__ = 'style_guides'
+
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id', ondelete='CASCADE'),
+        nullable=False
+    )
+
+
+    title = db.Column(
+        db.Text,
+        unique=True,
+        nullable=False
+    )
+
+    primary_dark_color = db.Column(
+        db.Text
+    )
+
+    primary_light_color = db.Column(
+        db.Text
+    )
+
+    accent_1_color = db.Column(
+        db.Text
+    )
+
+    accent_2_color = db.Column(
+        db.Text
+    )
+
+    p = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h1 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h2 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h3 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h4 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h5 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
+
+    h6 = db.Column(
+        db.Integer,
+        db.ForeignKey('user_font_styles.id')
+    )
 
     timestamp = db.Column(
         db.DateTime,
@@ -211,55 +314,15 @@ class UserFontStyle(db.Model):
         default=datetime.utcnow()
     )
 
+    
 
 
 
 
-# class ColorScheme(db.Model):
-
-#     ___tablename__ = 'color_schemes'
-
-#     id = db.Column (
-#         db.Integer,
-#         primary_key=True,
-#         autoincrement=True
-#     )
-
-#     user_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('users.id', ondelete='CASCADE'),
-#         nullable=False
-#     )
-
-#     primary = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default="0,0,0"
-#     )
-
-#     secondary = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default="255,255,255"
-#     )
-
-#     accent_1 = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default=None
-#     )
-
-#     accent_2 = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default=None
-#     )
-
-#     timestamp = db.Column(
-#         db.DateTime,
-#         nullable=False,
-#         default=datetime.utcnow()
-#     )
+def format_datetime():
+    date_time = datetime.utcnow()
+    format_date = date_time.strftime("%d %B, %Y")
+    return format_date
 
 
 #     def convert_color_to_rgb(self, color):
@@ -285,90 +348,5 @@ class UserFontStyle(db.Model):
 
 
 
-#     def __repr__(self):
-#         return f"<ColorScheme {self.user.username}-{self.id}: Primary={self.primary}, Secondary={self.secondary}, Accent_1={self.accent_1}, Accent_2={self.accent_2}>"
 
 
-
-
-
-# class StyleGuide(db.Model):
-
-#     ___tablename__ = 'style_guides'
-
-#     id = db.Column (
-#         db.Integer,
-#         primary_key=True,
-#         autoincrement=True
-#     )
-
-#     user_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user.id', ondelete='CASCADE'),
-#         nullable=False
-#     )
-
-
-#     title = db.Column(
-#         db.Text,
-#         unique=True,
-#         nullable=False
-#     )
-
-#     color_scheme_id = db.Column(
-#         db.Integer,
-#         db.ForeignKey('color_schemes.id')
-#     )
-
-#     color_scheme = db.relationship('ColorScheme', backref='style_guides')
-
-#     p = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h1 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h2 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h3 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h4 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h5 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     h6 = db.Column(
-#         db.Integer,
-#         db.ForeignKey('user_font_styles.id')
-#     )
-
-#     timestamp = db.Column(
-#         db.DateTime,
-#         nullable=False,
-#         default=datetime.utcnow()
-#     )
-
-#     
-
-
-
-
-# def format_datetime():
-#     date_time = datetime.utcnow()
-#     format_date = date_time.strftime("%d %B, %Y")
-#     return format_date

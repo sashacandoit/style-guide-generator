@@ -2,7 +2,7 @@ from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Email, Length, NumberRange
-from wtforms_html5 import ColorInput
+# from wtforms_html5 import ColorInput
 import email_validator
 
 
@@ -49,10 +49,10 @@ class DeleteForm(FlaskForm):
 class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
-    primary_dark = StringField('Primary Dark', widget=ColorInput())
-    primary_light = StringField('Primary Light', widget=ColorInput())
-    accent_1 = StringField('Accent 1', widget=ColorInput())
-    accent_2 = StringField('Accent 2', widget=ColorInput())
+    # primary_dark = StringField('Primary Dark', widget=ColorInput())
+    # primary_light = StringField('Primary Light', widget=ColorInput())
+    # accent_1 = StringField('Accent 1', widget=ColorInput())
+    # accent_2 = StringField('Accent 2', widget=ColorInput())
 
 
 
@@ -61,7 +61,7 @@ class TypesettingForm(FlaskForm):
     Form for defining typeface and typesetting for style guide.
     
     Would like this to automatically add id to styleguide for a chosen font style once submitted (ie. for H1, H2, etc)
-    
+
     """
 
     primary_typeface = SelectField('primary_typeface', choices=[])
