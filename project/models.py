@@ -53,11 +53,7 @@ class User(db.Model):
     )
 
 
-    user_font_styles = db.relationship('UserFontStyle', backref='user')
-
-    # color_schemes = db.relationship('ColorScheme', backref='user')
-
-    # style_guides = db.relationship('StyleGuide', backref='user')
+    style_guides = db.relationship('StyleGuide', backref='user')
 
 
 
@@ -166,7 +162,8 @@ def add_api_data():
 
 
 
-class UserTypefaces(db.Model):
+
+class UserTypeface(db.Model):
     __tablename__ = 'user_typefaces'
 
     id = db.Column (
@@ -180,9 +177,11 @@ class UserTypefaces(db.Model):
         db.ForiegnKey('style_guide.id')
     )
 
-    style_guide = db.relationship('StyleGuides')
-
     font_family = db.Column(
+        db.Text
+    )
+
+    category = db.Column(
         db.Text
     )
 
@@ -206,22 +205,16 @@ class UserFontStyle(db.Model):
 
     style_guide_id = db.Column(
         db.Integer,
-        db.ForiegnKey('style_guide.id')
-    )
+        db.ForiegnKey('style_guide.id', ondelete='CASCADE'),
+        nullable=False)
 
-    style_guide = db.relationship('StyleGuides')
 
-    font_family = db.Column(
+    typeface = db.Column(
         db.Text,
-        db.ForeignKey('user_typeface.font_family')
+        db.ForeignKey('user_typeface.id')
     )
 
-    font_variant = db.Column(
-        db.Text,
-        db.ForeignKey('user_typeface.variant')
-    )
-
-    user_typeface = db.relationship('UserTypeface')
+    # user_typeface = db.relationship('UserTypeface')
 
     text_size = db.Column(
         db.Integer
@@ -250,11 +243,9 @@ class StyleGuide(db.Model):
         nullable=False
     )
 
-
     title = db.Column(
         db.Text,
-        unique=True,
-        nullable=False
+        unique=True
     )
 
     primary_dark_color = db.Column(
@@ -307,6 +298,11 @@ class StyleGuide(db.Model):
         db.Integer,
         db.ForeignKey('user_font_styles.id')
     )
+
+    user_typeface = db.relationship("UserTypeface", backref='style_guide')
+
+    user_font_style = db.relationship("UserFontStyle", backref='style_guide')
+
 
     timestamp = db.Column(
         db.DateTime,
