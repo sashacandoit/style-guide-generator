@@ -204,10 +204,6 @@ class UserFontStyle(db.Model):
         db.Integer
     )
 
-    font_color = db.Column(
-        db.Text
-    ) 
-
 
     timestamp = db.Column(
         db.DateTime,
@@ -247,19 +243,13 @@ class UserFontStyle(db.Model):
 #         default="255,255,255"
 #     )
 
-#     acccent_1 = db.Column(
+#     accent_1 = db.Column(
 #         db.Text,
 #         nullable=False,
 #         default=None
 #     )
 
-#     acccent_2 = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default=None
-#     )
-
-#     acccent_3 = db.Column(
+#     accent_2 = db.Column(
 #         db.Text,
 #         nullable=False,
 #         default=None
@@ -296,7 +286,7 @@ class UserFontStyle(db.Model):
 
 
 #     def __repr__(self):
-#         return f"<ColorScheme {self.user.username}-{self.id}: Primary={self.primary}, Secondary={self.secondary}, Accent_1={self.accent_1}, Accent_2={self.accent_2}, Accent_3={self.accent_3}>"
+#         return f"<ColorScheme {self.user.username}-{self.id}: Primary={self.primary}, Secondary={self.secondary}, Accent_1={self.accent_1}, Accent_2={self.accent_2}>"
 
 
 
@@ -327,52 +317,44 @@ class UserFontStyle(db.Model):
 
 #     color_scheme_id = db.Column(
 #         db.Integer,
-#         db.ForeignKey('color_schemes.id'),
-#         nullable=False
+#         db.ForeignKey('color_schemes.id')
 #     )
 
 #     color_scheme = db.relationship('ColorScheme', backref='style_guides')
 
 #     p = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h1 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h2 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h3 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h4 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h5 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     h6 = db.Column(
 #         db.Integer,
-#         db.ForeignKey('user_font_styles.id'),
-#         nullable=False
+#         db.ForeignKey('user_font_styles.id')
 #     )
 
 #     timestamp = db.Column(
@@ -381,11 +363,7 @@ class UserFontStyle(db.Model):
 #         default=datetime.utcnow()
 #     )
 
-#     public = db.Column(
-#         db.Boolean, 
-#         default=True,
-#         nullable=False
-#     )
+#     
 
 
 

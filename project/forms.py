@@ -58,7 +58,10 @@ class ColorSchemeForm(FlaskForm):
 
 class TypesettingForm(FlaskForm):
     """
-    Form for defining typeface and typesetting for style guide 
+    Form for defining typeface and typesetting for style guide.
+    
+    Would like this to automatically add id to styleguide for a chosen font style once submitted (ie. for H1, H2, etc)
+    
     """
 
     primary_typeface = SelectField('primary_typeface', choices=[])
@@ -66,8 +69,8 @@ class TypesettingForm(FlaskForm):
     text_size = IntegerField('Text Size', validators=[
         NumberRange(min=10, max=110)
             ])
-    text_color = SelectField('hex_code', choices=[])
-    test_transform = SelectField('text-transform', choices=[
+
+    text_transform = SelectField('text-transform', choices=[
         ('none', 'None'), 
         ('uppercase', 'UPPERCASE'), 
         ('capitalize', 'Capitalize'), 
