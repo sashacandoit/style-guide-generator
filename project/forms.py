@@ -2,7 +2,8 @@ from tokenize import String
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Email, Length, NumberRange
-# from wtforms_html5 import ColorInput
+# from wtforms_components import ColorField
+# from wtforms.fields import ColorField
 import email_validator
 
 
@@ -45,7 +46,6 @@ class DeleteForm(FlaskForm):
 #############################################################
 #STYLE GUIDE FORMS
 #############################################################
-
 class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
@@ -53,7 +53,6 @@ class ColorSchemeForm(FlaskForm):
     # primary_light = StringField('Primary Light', widget=ColorInput())
     # accent_1 = StringField('Accent 1', widget=ColorInput())
     # accent_2 = StringField('Accent 2', widget=ColorInput())
-
 
 
 class TypesettingForm(FlaskForm):
@@ -75,5 +74,15 @@ class TypesettingForm(FlaskForm):
         ('uppercase', 'UPPERCASE'), 
         ('capitalize', 'Capitalize'), 
         ('lowercase', 'lowercase')])
+
+    style_ref = SelectField('style_ref', choices=[
+        ('p', 'Body - P'),
+        ('h1', 'Display - H1'),
+        ('h2', 'Header - H2'),
+        ('h3', 'Header - H3'),
+        ('h4', 'Header - H4'),
+        ('h5', 'Header - H5'),
+        ('h6', 'Header - H6')
+    ])
 
     

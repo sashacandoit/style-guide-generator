@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm
-from models import db, connect_db, User, APIFontStyle, add_api_data
+from models import db, connect_db, User, APIFontStyle, add_api_data, StyleGuide, UserTypeface, TypesettingStyle
 from sqlalchemy.exc import IntegrityError
 # import requests
 # from api_keys import GOOGLE_API_KEY
@@ -139,5 +139,5 @@ def delete_user(username):
 
 @app.route('/style-guide')
 def view_style_guide():
-    return render_template('style_guide.html')
+    return render_template('new_style_guide.html')
 

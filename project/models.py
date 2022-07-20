@@ -162,71 +162,6 @@ def add_api_data():
 
 
 
-
-class UserTypeface(db.Model):
-    __tablename__ = 'user_typefaces'
-
-    id = db.Column (
-        db.Integer,
-        primary_key=True,
-        autoincrement=True
-    )
-
-    style_guide_id = db.Column(
-        db.Integer,
-        db.ForiegnKey('style_guide.id')
-    )
-
-    font_family = db.Column(
-        db.Text
-    )
-
-    category = db.Column(
-        db.Text
-    )
-
-    variant = db.Column(
-        db.Text
-    )
-
-
-
-
-class UserFontStyle(db.Model):
-
-    ___tablename__ = 'user_font_styles'
-    
-
-    id = db.Column (
-        db.Integer,
-        primary_key=True,
-        autoincrement=True
-    )
-
-    style_guide_id = db.Column(
-        db.Integer,
-        db.ForiegnKey('style_guide.id', ondelete='CASCADE'),
-        nullable=False)
-
-
-    typeface = db.Column(
-        db.Text,
-        db.ForeignKey('user_typeface.id')
-    )
-
-    # user_typeface = db.relationship('UserTypeface')
-
-    text_size = db.Column(
-        db.Integer
-    )
-
-    text_transform = db.Column(
-        db.Text, 
-        default=None
-    )
-
-
-
 class StyleGuide(db.Model):
 
     ___tablename__ = 'style_guides'
@@ -237,9 +172,9 @@ class StyleGuide(db.Model):
         autoincrement=True
     )
 
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey('user.id', ondelete='CASCADE'),
+    username = db.Column(
+        db.Text,
+        db.ForeignKey('user.username', ondelete='CASCADE'),
         nullable=False
     )
 
@@ -264,44 +199,15 @@ class StyleGuide(db.Model):
         db.Text
     )
 
-    p = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
+    # typesetting_styles = db.Column(
+    #     db.Integer,
+    #     db.ForeignKey('typesetting_styles.style_guide_id')
+    # )
 
-    h1 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
-
-    h2 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
-
-    h3 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
-
-    h4 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
-
-    h5 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
-
-    h6 = db.Column(
-        db.Integer,
-        db.ForeignKey('user_font_styles.id')
-    )
 
     user_typeface = db.relationship("UserTypeface", backref='style_guide')
 
-    user_font_style = db.relationship("UserFontStyle", backref='style_guide')
+    typesetting_styles = db.relationship("TypesettingStyle", backref='style_guide')
 
 
     timestamp = db.Column(
@@ -310,7 +216,75 @@ class StyleGuide(db.Model):
         default=datetime.utcnow()
     )
 
+
+
+class UserTypeface(db.Model):
+    __tablename__ = 'user_typefaces'
+
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    style_guide_id = db.Column(
+        db.Integer,
+        db.ForeignKey('style_guide.id')
+    )
+
+    font_family = db.Column(
+        db.Text
+    )
+
+    category = db.Column(
+        db.Text
+    )
+
+    variant = db.Column(
+        db.Text
+    )
+
+    typesetting_styles = db.relationship('TypesettingStyle', backref='user_typefaces')
+
+
+
+
+class TypesettingStyle(db.Model):
+
+    ___tablename__ = 'typesetting_styles'
     
+
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        autoincrement=True
+    )
+
+    style_guide_id = db.Column(
+        db.Integer,
+        db.ForeignKey('style_guide.id', ondelete='CASCADE'),
+        nullable=False)
+
+
+    typeface = db.Column(
+        db.Integer,
+        db.ForeignKey('user_typefaces.id', ondelete='CASCADE')
+    )
+
+    text_size = db.Column(
+        db.Integer
+    )
+
+    text_transform = db.Column(
+        db.Text, 
+        default=None
+    )
+
+    style_ref = db.Column(
+        # p, h1, h2, h3, h4, h5, h6
+        db.Text
+    )
+
 
 
 
