@@ -1,6 +1,7 @@
 from tokenize import String
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, IntegerField
+# from flask_colorpicker import colorpicker
+from wtforms import StringField, PasswordField, SelectField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, NumberRange
 # from wtforms_components import ColorField
 # from wtforms.fields import ColorField
@@ -49,10 +50,10 @@ class DeleteForm(FlaskForm):
 class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
-    # primary_dark = StringField('Primary Dark', widget=ColorInput())
-    # primary_light = StringField('Primary Light', widget=ColorInput())
-    # accent_1 = StringField('Accent 1', widget=ColorInput())
-    # accent_2 = StringField('Accent 2', widget=ColorInput())
+    primary_dark = SubmitField('Primary Dark')
+    primary_light = SubmitField('Primary Light')
+    accent_1 = SubmitField('Accent 1')
+    accent_2 = SubmitField('Accent 2')
 
 
 class TypesettingForm(FlaskForm):

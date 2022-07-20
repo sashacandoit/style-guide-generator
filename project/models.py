@@ -140,6 +140,21 @@ class APIFontStyle(db.Model):
         return font_style
 
 
+def get_all_fonts():
+    res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+
+    data = res.json()
+
+    all_fonts = []
+
+    for item in data['items']:
+        all_fonts.append((item['family'], item['family']))
+
+    print(all_fonts)
+    return all_fonts
+
+
+
 def add_api_data():
     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
 

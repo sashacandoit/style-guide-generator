@@ -29,6 +29,27 @@
                 <p class="text-sm pl-20">Hex: #F2EEAC</p>
             </div><!-- / column -->
         </div>
+
+        <form action="POST" class="form-control">
+            <div class="row">
+                {{ form.hidden_tag() }}
+                
+                {% for field in form
+                if field.widget.input_type != 'hidden' %}
+                
+                <div class="col-md-3 mb-15">
+                    {{ field(class_="form-control form-control-color", type_="color") }}
+                    {{ field.label(class_="form-label mt-10 pl-20 lead")}}
+                    <p class="text-sm pl-20">Hex: {{ field.data }}</p>
+                
+                </div><!-- / column -->
+                {% endfor %}
+            </div>
+            
+        </form>
+        
+
+        
     </div>
 
 </div>
