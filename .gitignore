@@ -5,3 +5,4 @@ models/__pycache__/
 project/__pycache__/
 api_keys.py
 models/
+project/static/bootstrap-colorpicker

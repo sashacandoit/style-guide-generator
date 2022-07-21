@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
+
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm
 from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle
 from sqlalchemy.exc import IntegrityError
 
-
-# import requests
-# from api_keys import GOOGLE_API_KEY
 
 app = Flask(__name__)
 
