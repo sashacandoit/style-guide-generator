@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="lg">
+    <div class="container">
+        <div class="promo-box">
+            <div class="row">
+                <form action="POST" class="">
+                    {{ form.hidden_tag() }}
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-5">
+                            <h5>Primary Typeface</h5>
+                            <p class="lead">
+                                This is default typeface, a reflection of the overall brand identity.
+                            </p>
+                        </div>
+
+                        <div class="col-md-5">
+                            {{ form.primary_typeface(class_="custom-select") }}
+                        </div><!-- / column -->
+                    </div><!-- / row -->
+                    <div class="row mt-60 justify-content-center">
+                        <div class="col-3 text center">
+                            <button type="submit" class="btn btn-primary-gradient pill btn-lg w-100">Submit</button>
+                        </div>
+
+                    </div>
+
+                </form><!-- / form -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

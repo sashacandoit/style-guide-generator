@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
-from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm
+from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, PrimaryTypefaceForm
 from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle
 from sqlalchemy.exc import IntegrityError
 
@@ -137,14 +137,24 @@ def delete_user(username):
 # STYLE GUIDE ROUTES
 #############################################################
 
-
-@app.route('/style-guide/typesetting')
-def view_style_guide():
-    form = TypesettingForm()
+@app.route('/style-guide/typeface')
+def set_typeface():
+    form = PrimaryTypefaceForm()
     all_fonts = get_all_fonts()
     form.primary_typeface.choices = all_fonts
         
+    return render_template('typeface_form.html', form=form)
+
+
+@app.route('/style-guide/typesetting')
+def set_typesettings():
+    form = TypesettingForm()
+    all_fonts = get_all_fonts()
+    # form.primary_typeface.choices = all_fonts
+        
     return render_template('typesetting_form.html', form=form)
+
+
 
 
 # @app.route('/style-guide/color-scheme')

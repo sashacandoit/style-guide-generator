@@ -1,24 +1,46 @@
 {% extends 'base.html' %}
+{% block styles %} 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap">
+{% endblock %}
+
 {% block content %}
-
-<div class="container">
-
-    <div class="row">
-        <form action="POST" class="form-control">
-            <div class="row">
-                {{ form.hidden_tag() }}
-
-                <div class="col-md-3 mb-15">
-
-                    {{ form.primary_typeface.label }}
-                    {{ form.primary_typeface(class_="form-control form-select") }}
-
-                </div><!-- / column -->
-
+<section class="lg">
+    <div class="container">
+        <div class="row">
+            <h5>Primary Typeface</h5>
+            <p class="lead">
+                This is default typeface, a reflection of the overall brand identity.
+            </p>
+        </div>
+        
+        <div class="row justify-content-between align-items-end">
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="primary-typeface">Nunito</div>
+                </div>
+                
             </div>
 
-        </form>
+            <div class="col-md-6">
+                <div class="row justify-content-between">
+                    <div class="col-6 col-md-3">
+                        <span class="typeface-weight">Aa</span>
+                        
+                    </div>
+                
+                    <div class="col-6 col-md-3">
+                        <span class="typeface-weight">Aa</span>
+                    </div>
+                
+                    <div class="col-6 col-md-3">
+                        <span class="typeface-weight">Aa</span>
+                    </div>
+                </div>
+            </div><!-- / column -->
+        </div><!-- / row -->
+            
     </div>
-</div>
+</section>
+
 
 {% endblock %}
