@@ -93,6 +93,20 @@
 }
 
 
+/* typesetting form */
+
+.primary-typeface-set {
+    font-size: 72px;
+    line-height: 76px;
+    color: #c9d0f4;
+}
+
+.typeface-weight-set {
+    font-size: 62px;
+    line-height: 76px;
+    color: #c9d0f4;
+}
+
 
 /*---------- ui ----------*/
 .color-box {

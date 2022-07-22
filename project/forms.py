@@ -67,25 +67,26 @@ class TypesettingForm(FlaskForm):
     Would like this to automatically add id to styleguide for a chosen font style once submitted (ie. for H1, H2, etc)
 
     """
-    variant = SelectField('variant', choices=[])
+    variant = SelectField('variant', choices=['Font Weight', 'choose'])
     text_size = IntegerField('Text Size', validators=[
         NumberRange(min=10, max=110)
             ])
 
     text_transform = SelectField('text-transform', choices=[
+        ('placeholder', 'Text Transform'), 
         ('none', 'None'), 
         ('uppercase', 'UPPERCASE'), 
         ('capitalize', 'Capitalize'), 
         ('lowercase', 'lowercase')])
 
     style_ref = SelectField('style_ref', choices=[
-        ('p', 'Body - P'),
         ('h1', 'Display - H1'),
         ('h2', 'Header - H2'),
-        ('h3', 'Header - H3'),
-        ('h4', 'Header - H4'),
-        ('h5', 'Header - H5'),
-        ('h6', 'Header - H6')
+        ('h3', 'Title - H3'),
+        ('h4', 'Subheader - H4'),
+        ('h5', 'Headline - H5'),
+        ('h6', 'Button - H6'),
+        ('p', 'Body - P')
     ])
 
     

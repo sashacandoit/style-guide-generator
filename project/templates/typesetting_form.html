@@ -4,19 +4,13 @@
 {% endblock %}
 
 {% block content %}
-<section class="lg">
-    <div class="container">
-        <div class="row">
-            <h5>Primary Typeface</h5>
-            <p class="lead">
-                This is default typeface, a reflection of the overall brand identity.
-            </p>
-        </div>
-        
-        <div class="row justify-content-between align-items-end">
+<section class="med">
+    <div class="container mt-40">
+        <div class="row justify-content-between align-items-start mt-20">
             <div class="col-md-5">
                 <div class="row">
-                    <div class="primary-typeface">Nunito</div>
+                    <div class="primary-typeface-set">Nunito</div>
+                    <div style="color: #b1b8d8;">Primary Typeface</div>
                 </div>
                 
             </div>
@@ -24,21 +18,71 @@
             <div class="col-md-6">
                 <div class="row justify-content-between">
                     <div class="col-6 col-md-3">
-                        <span class="typeface-weight">Aa</span>
-                        
+                        <span class="typeface-weight-set">Aa</span>
                     </div>
                 
                     <div class="col-6 col-md-3">
-                        <span class="typeface-weight">Aa</span>
+                        <span class="typeface-weight-set">Aa</span>
                     </div>
                 
                     <div class="col-6 col-md-3">
-                        <span class="typeface-weight">Aa</span>
+                        <span class="typeface-weight-set">Aa</span>
                     </div>
                 </div>
             </div><!-- / column -->
         </div><!-- / row -->
             
+    </div>
+</section>
+
+
+<section class="lg">
+    <div class="container">
+        <div class="section-title-area mb-50">
+            <h3 class="section-title">Style Guide<span class="text-primary"> Typesetting</span></h3>
+            <h5 class="section-sub-title">Now we'll set the typeface styles for all the headings and text.</h5>
+        </div>
+        <!-- <div class="row mb-20">
+            <h5>Style Guide Typesetting</h5>
+            <p class="lead">
+                Now we'll set the typeface styles for all the headings and text
+            </p>
+        </div> -->
+        <div class="promo-box">
+            <div class="row">
+                <form action="POST" class="">
+                    {{ form.hidden_tag() }}
+    
+                    <div class="row align-items-center justify-content-between ">
+                        <div class="col-md-5 pl-60">
+                            <h6>Display <span class="text-primary">H1</span></h6>
+                            <p class="">
+                                This is your largest typesetting. Display headers are mostly used for Splash headings and Modal
+                                titles.
+                            </p>
+                        </div>
+    
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {{ form.style_ref (class_="custom-select mb-20") }}
+
+                                {{ form.variant(class_="custom-select mb-20") }}
+
+                                {{ form.text_size (class_="form-control mb-20", placeholder="Font Size") }}
+
+                                {{ form.text_transform (class_="custom-select") }}
+                                
+                            </div>
+                            <div class="row mt-30 justify-content-end">
+                                <div class="col text-end">
+                                    <button type="submit" class="btn btn-primary-gradient pill btn-lg w-100">Submit</button>
+                                </div>
+                            </div>
+                        </div><!-- / column -->
+                    </div><!-- / row -->
+                </form><!-- / form -->
+            </div>
+        </div>
     </div>
 </section>
 
