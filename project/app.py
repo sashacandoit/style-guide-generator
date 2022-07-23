@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
-from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, PrimaryTypefaceForm
+from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, StyleGuideTitleForm, PrimaryTypefaceForm
 from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle
 from sqlalchemy.exc import IntegrityError
 
@@ -14,6 +14,8 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'somethingsecret'
 
 connect_db(app)
+
+FORMS = "forms"
 
 
 #############################################################
@@ -137,6 +139,38 @@ def delete_user(username):
 # STYLE GUIDE ROUTES
 #############################################################
 
+@app.route('users/<username>/style-guide/new', methods=["GET", "POST"])
+def start_new_styleguide(username):
+    """Starts a session when user starts new style guide by giving it a title redirects to first step/form page"""
+
+    # checks if user is in session
+    if username != session['username'] or "username" not in session:
+        flash('Sorry, you are not authorized to view that page')
+        return redirect('/')
+
+    form = StyleGuideTitleForm()
+    user = User.query.get(username)
+
+    # handles form submition for new style guide title
+    if form.validate_on_submit():
+        title = form.title.data
+        new_style_guide = StyleGuide(username=session["username"], title=title)
+
+        # adds title to database assigned to new styleguide assigned to that user
+        db.session.add(new_style_guide)
+        db.session.commit()
+
+        # adds FORMS to session with no submitions
+        session[FORMS] = []
+        # redirects to first step/form page 
+        return redirect("/new/0")
+
+    # renders start page with stype guide title form
+    return render_template('style-guide/new.html', user=user, form=form)
+
+
+
+
 @app.route('/style-guide/typeface')
 def set_typeface():
     form = PrimaryTypefaceForm()
@@ -155,8 +189,6 @@ def set_typesettings():
     return render_template('typesetting_form.html', form=form)
 
 
-
-
 # @app.route('/style-guide/color-scheme')
 # def view_style_guide():
 #     color_form = ColorSchemeForm()
@@ -164,3 +196,7 @@ def set_typesettings():
 #         primary_dark = color_form.primary_dark.data
 #         return primary_dark
 #     return render_template('new_style_guide.html', form=color_form)
+
+
+@app.route('/style-guide/new', methods=["GET", "POST"])
+def start_style_guide():

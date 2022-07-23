@@ -47,6 +47,13 @@ class DeleteForm(FlaskForm):
 #############################################################
 #STYLE GUIDE FORMS
 #############################################################
+
+class StyleGuideTitleForm(FlaskForm):
+    """Form for adding a title to start a new styleguide """
+
+    title = StringField('Style Guide Title', validators=[DataRequired()])
+
+
 class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
@@ -88,5 +95,24 @@ class TypesettingForm(FlaskForm):
         ('h6', 'Button - H6'),
         ('p', 'Body - P')
     ])
+
+
+class StyleGuide():
+    def __init__(self, forms):
+
+        self.forms = forms
+
+
+user_style_guide = StyleGuide([
+    ColorSchemeForm(),
+    PrimaryTypefaceForm(),
+    TypesettingForm(style_ref='h1'),
+    TypesettingForm(style_ref='h2'),
+    TypesettingForm(style_ref='h3'),
+    TypesettingForm(style_ref='h4'),
+    TypesettingForm(style_ref='h5'),
+    TypesettingForm(style_ref='h6'),
+    TypesettingForm(style_ref='p')
+])
 
     
