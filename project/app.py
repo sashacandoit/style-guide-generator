@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
-from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants
+from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants
 from sqlalchemy.exc import IntegrityError
 
 
@@ -204,7 +204,7 @@ def typesetting_body(style_guide_id):
         return redirect(f"/style-guide/{style_guide_id}/typesetting/h1")
 
         
-    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form)
+    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form, variants=variants)
 
 
 
