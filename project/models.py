@@ -155,7 +155,7 @@ def get_all_fonts():
     return all_fonts
 
 
-def get_typeface_variants(primary_typeface):
+def get_typeface_variants(typeface):
     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
 
     data = res.json()
@@ -165,13 +165,37 @@ def get_typeface_variants(primary_typeface):
         font_family = item['family']
         category = item['category']
         for variant in item['variants']:
-            if font_family == primary_typeface:
+            if font_family == typeface:
                 variant = variant
                 typeface_variant = (variant, variant)
                 typeface_variants.append(typeface_variant)
-                
+
     print(typeface_variants)
     return typeface_variants
+
+
+def get_variant_urls(typeface):
+    res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+
+    data = res.json()
+    api_urls = []
+    base_url = 'https://fonts.googleapis.com/css?family='
+    base_url = base_url + (typeface.replace(" ", "+"))
+    
+
+    for item in data['items']:
+        if item['family'] == typeface:
+            variants = item['variants']
+            for variant in variants:
+                variant_url = base_url + ':' + variant
+                api_urls.append(variant_url) 
+    
+    print(api_urls)
+    return api_urls
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
-from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants
+from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants, get_variant_urls
 from sqlalchemy.exc import IntegrityError
 
 
