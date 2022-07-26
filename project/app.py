@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
-from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, StyleGuideTitleForm, PrimaryTypefaceForm
-from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle
+from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
+from models import db, connect_db, User, APIFontStyle, add_api_data, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants
 from sqlalchemy.exc import IntegrityError
 
 
@@ -15,7 +15,6 @@ app.config['SECRET_KEY'] = 'somethingsecret'
 
 connect_db(app)
 
-FORMS = "forms"
 
 
 #############################################################
@@ -139,7 +138,7 @@ def delete_user(username):
 # STYLE GUIDE ROUTES
 #############################################################
 
-@app.route('users/<username>/style-guide/new', methods=["GET", "POST"])
+@app.route('/users/<username>/style-guide/new', methods=["GET", "POST"])
 def start_new_styleguide(username):
     """Starts a session when user starts new style guide by giving it a title redirects to first step/form page"""
 
@@ -148,45 +147,74 @@ def start_new_styleguide(username):
         flash('Sorry, you are not authorized to view that page')
         return redirect('/')
 
-    form = StyleGuideTitleForm()
+    form = NewStyleGuideForm()
     user = User.query.get(username)
+    all_fonts = get_all_fonts()
+    form.primary_typeface.choices = all_fonts
 
     # handles form submition for new style guide title
     if form.validate_on_submit():
         title = form.title.data
-        new_style_guide = StyleGuide(username=session["username"], title=title)
+        primary_typeface = form.primary_typeface.data
+        new_style_guide = StyleGuide(username=session["username"], title=title, primary_typeface=primary_typeface)
 
         # adds title to database assigned to new styleguide assigned to that user
         db.session.add(new_style_guide)
         db.session.commit()
 
         # adds FORMS to session with no submitions
-        session[FORMS] = []
+        session['style_guide'] = new_style_guide.id
         # redirects to first step/form page 
-        return redirect("/new/0")
+        return redirect(f"/style-guide/{new_style_guide.id}/typesetting/body")
 
     # renders start page with stype guide title form
-    return render_template('style-guide/new.html', user=user, form=form)
+    return render_template('style_guide_new.html', user=user, form=form)
 
 
+##################################
+# TYPESETTING ROUTES
+##################################
 
 
-@app.route('/style-guide/typeface')
-def set_typeface():
-    form = PrimaryTypefaceForm()
-    all_fonts = get_all_fonts()
-    form.primary_typeface.choices = all_fonts
-        
-    return render_template('typeface_form.html', form=form)
+@app.route('/style-guide/<style_guide_id>/typesetting/body')
+def typesetting_body(style_guide_id):
 
+    style_guide = StyleGuide.query.get(style_guide_id)
 
-@app.route('/style-guide/typesetting')
-def set_typesettings():
+    if style_guide.username != session['username'] or "username" not in session:
+        flash('Sorry, you are not authorized to view that page')
+        return redirect('/')
+
     form = TypesettingForm()
-    all_fonts = get_all_fonts()
-    # form.primary_typeface.choices = all_fonts
+    primary_typeface = style_guide.primary_typeface
+    style_ref = 'p'
+    variants = get_typeface_variants(primary_typeface)
+    form.variant.choices = variants
+
+    if form.validate_on_submit():
+        variant=form.variant.data
+        text_size= form.text_size.data
+        text_transform = form.text_transform.data
+
+        body_typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
+
+        db.session.add(body_typesetting)
+        db.session.commit()
+
+        return redirect(f"/style-guide/{style_guide_id}/typesetting/h1")
+
         
-    return render_template('typesetting_form.html', form=form)
+    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form)
+
+
+
+
+
+
+
+
+
+
 
 
 # @app.route('/style-guide/color-scheme')
@@ -198,5 +226,74 @@ def set_typesettings():
 #     return render_template('new_style_guide.html', form=color_form)
 
 
-@app.route('/style-guide/new', methods=["GET", "POST"])
-def start_style_guide():
+# @app.route('users/<username>/style-guide/new', methods=["GET", "POST"])
+# def start_new_styleguide(username):
+#     """Starts a session when user starts new style guide by giving it a title redirects to first step/form page"""
+
+#     # checks if user is in session
+#     if username != session['username'] or "username" not in session:
+#         flash('Sorry, you are not authorized to view that page')
+#         return redirect('/')
+
+#     with app.app_context():
+
+#         form = StyleGuideTitleForm()
+#         user = User.query.get(username)
+
+#         # handles form submition for new style guide title
+#         if form.validate_on_submit():
+#             title = form.title.data
+#             new_style_guide = StyleGuide(username=session["username"], title=title)
+
+#             # adds title to database assigned to new styleguide assigned to that user
+#             db.session.add(new_style_guide)
+#             db.session.commit()
+
+#             # adds FORMS to session with no submitions
+#             session[FORMS] = []
+#             # redirects to first step/form page 
+#             return redirect("/new/0")
+
+#     # renders start page with stype guide title form
+#     return render_template('style-guide/new.html', user=user, form=form)
+
+
+# @app.route('/style-guide/new/<int:form_id>', methods=["GET"])
+# def start_style_guide_forms(form_id):
+#     """Shows the next form in sequence for new style guide"""
+
+#     #get forms already submitted
+#     submissions = session.get(FORMS)
+
+#     print('***************************************')
+#     print(session(FORMS))
+#     print('***************************************')
+
+#     if (submissions == None):
+#         #if session not started, redirect to home
+#         return redirect('/')
+
+#     if (len(submissions) == len(user_style_guide.forms)):
+#         #style guide forms completed - redirect to home
+#         return redirect('/')
+
+#     if (len(submissions) != form_id):
+#         #user accessing forms out of order
+        
+#         flash("Please answer questions in order")
+
+#         #return user to correct from in sequence
+#         return redirect(f'/style-guide/new/{len(submissions)}')
+
+#     form = user_style_guide.forms[form_id]
+#     return render_template('style-guide/new.html', form_id=form_id, form=form)
+
+
+
+# @app.route('/style-guide/typeface')
+# def set_typeface():
+#     form = PrimaryTypefaceForm()
+#     all_fonts = get_all_fonts()
+#     form.primary_typeface.choices = all_fonts
+        
+#     return render_template('typeface_form.html', form=form)

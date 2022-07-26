@@ -6,6 +6,7 @@ from datetime import datetime
 import webcolors 
 from webcolors import name_to_rgb, hex_to_rgb
 import requests
+import json
 from api_keys import GOOGLE_API_KEY
 
 db = SQLAlchemy()
@@ -154,6 +155,24 @@ def get_all_fonts():
     return all_fonts
 
 
+def get_typeface_variants(primary_typeface):
+    res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+
+    data = res.json()
+    typeface_variants = []
+
+    for item in data['items']:
+        font_family = item['family']
+        category = item['category']
+        for variant in item['variants']:
+            if font_family == primary_typeface:
+                variant = variant
+                typeface_variants = [(variant, variant)]
+                print(typeface_variants)
+
+    return typeface_variants
+
+
 
 def add_api_data():
     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
@@ -198,6 +217,10 @@ class StyleGuide(db.Model):
         unique=True
     )
 
+    primary_typeface = db.Column(
+        db.Text
+    )
+
     primary_dark_color = db.Column(
         db.Text
     )
@@ -220,7 +243,7 @@ class StyleGuide(db.Model):
     # )
 
 
-    user_typeface = db.relationship("UserTypeface", backref='style_guide')
+    # user_typeface = db.relationship("UserTypeface", backref='style_guide')
 
     typesetting_styles = db.relationship("TypesettingStyle", backref='style_guide')
 
@@ -259,7 +282,7 @@ class UserTypeface(db.Model):
         db.Text
     )
 
-    typesetting_styles = db.relationship('TypesettingStyle', backref='user_typefaces')
+    # typesetting_styles = db.relationship('TypesettingStyle', backref='user_typefaces')
 
 
 
@@ -282,8 +305,11 @@ class TypesettingStyle(db.Model):
 
 
     typeface = db.Column(
-        db.Integer,
-        db.ForeignKey('user_typefaces.id', ondelete='CASCADE')
+        db.Text
+    )
+
+    variant = db.Column(
+        db.Text
     )
 
     text_size = db.Column(

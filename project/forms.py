@@ -48,10 +48,11 @@ class DeleteForm(FlaskForm):
 #STYLE GUIDE FORMS
 #############################################################
 
-class StyleGuideTitleForm(FlaskForm):
+class NewStyleGuideForm(FlaskForm):
     """Form for adding a title to start a new styleguide """
 
     title = StringField('Style Guide Title', validators=[DataRequired()])
+    primary_typeface = SelectField('primary_typeface', choices=[])
 
 
 class ColorSchemeForm(FlaskForm):
@@ -61,6 +62,7 @@ class ColorSchemeForm(FlaskForm):
     primary_light = SubmitField('Primary Light')
     accent_1 = SubmitField('Accent 1')
     accent_2 = SubmitField('Accent 2')
+
 
 class PrimaryTypefaceForm(FlaskForm):
     """Form for defining typeface for the style guide """
@@ -74,7 +76,8 @@ class TypesettingForm(FlaskForm):
     Would like this to automatically add id to styleguide for a chosen font style once submitted (ie. for H1, H2, etc)
 
     """
-    variant = SelectField('variant', choices=['Font Weight', 'choose'])
+    variant = SelectField('variant', choices=[])
+
     text_size = IntegerField('Text Size', validators=[
         NumberRange(min=10, max=110)
             ])
@@ -86,33 +89,25 @@ class TypesettingForm(FlaskForm):
         ('capitalize', 'Capitalize'), 
         ('lowercase', 'lowercase')])
 
-    style_ref = SelectField('style_ref', choices=[
-        ('h1', 'Display - H1'),
-        ('h2', 'Header - H2'),
-        ('h3', 'Title - H3'),
-        ('h4', 'Subheader - H4'),
-        ('h5', 'Headline - H5'),
-        ('h6', 'Button - H6'),
-        ('p', 'Body - P')
-    ])
+    style_ref = StringField('style_ref')
 
 
-class StyleGuide():
-    def __init__(self, forms):
+# class StyleGuide():
+#     def __init__(self, forms):
 
-        self.forms = forms
+#         self.forms = forms
 
 
-user_style_guide = StyleGuide([
-    ColorSchemeForm(),
-    PrimaryTypefaceForm(),
-    TypesettingForm(style_ref='h1'),
-    TypesettingForm(style_ref='h2'),
-    TypesettingForm(style_ref='h3'),
-    TypesettingForm(style_ref='h4'),
-    TypesettingForm(style_ref='h5'),
-    TypesettingForm(style_ref='h6'),
-    TypesettingForm(style_ref='p')
-])
+# user_style_guide = StyleGuide([
+#     ColorSchemeForm(),
+#     PrimaryTypefaceForm(),
+#     TypesettingForm(style_ref='h1'),
+#     TypesettingForm(style_ref='h2'),
+#     TypesettingForm(style_ref='h3'),
+#     TypesettingForm(style_ref='h4'),
+#     TypesettingForm(style_ref='h5'),
+#     TypesettingForm(style_ref='h6'),
+#     TypesettingForm(style_ref='p')
+# ])
 
     

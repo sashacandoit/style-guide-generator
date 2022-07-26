@@ -13,7 +13,7 @@
         <div class="row justify-content-between align-items-start mt-20">
             <div class="col-md-5">
                 <div class="row">
-                    <div class="primary-typeface-set">Nunito</div>
+                    <div class="primary-typeface-set">{{ style_guide.primary_typeface }}</div>
                     <div style="color: #b1b8d8;">Primary Typeface</div>
                 </div>
                 
@@ -49,7 +49,7 @@
     
                     <div class="row align-items-center justify-content-between ">
                         <div class="col-md-5 pl-60">
-                            <h6>Display <span class="text-primary">H1</span></h6>
+                            <h6>Body <span class="text-primary">P</span></h6>
                             <p class="">
                                 This is your largest typesetting. Display headers are mostly used for Splash headings and Modal
                                 titles.
@@ -58,9 +58,7 @@
     
                         <div class="col-md-5">
                             <div class="form-group">
-                                {{ form.style_ref (class_="custom-select mb-20") }}
-
-                                {{ form.variant(class_="custom-select mb-20") }}
+                                {{ form.variant (class_="custom-select mb-20") }}
 
                                 {{ form.text_size (class_="form-control mb-20", placeholder="Font Size") }}
 
