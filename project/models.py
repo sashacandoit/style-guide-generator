@@ -155,7 +155,7 @@ def get_all_fonts():
     return all_fonts
 
 
-def get_typeface_variants(typeface):
+def get_variant_choices(typeface):
     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
 
     data = res.json()
@@ -197,8 +197,6 @@ def get_variant_urls(typeface):
 
 
 
-
-
 class StyleGuide(db.Model):
 
     ___tablename__ = 'style_guides'
@@ -223,6 +221,8 @@ class StyleGuide(db.Model):
     primary_typeface = db.Column(
         db.Text
     )
+
+    variants = db.relationship('TypefaceVariant', backref='style_guide')
 
     primary_dark_color = db.Column(
         db.Text
@@ -259,8 +259,8 @@ class StyleGuide(db.Model):
 
 
 
-class UserTypeface(db.Model):
-    __tablename__ = 'user_typefaces'
+class TypefaceVariant(db.Model):
+    __tablename__ = 'typeface_variants'
 
     id = db.Column (
         db.Integer,
@@ -270,8 +270,8 @@ class UserTypeface(db.Model):
 
     style_guide_id = db.Column(
         db.Integer,
-        db.ForeignKey('style_guide.id')
-    )
+        db.ForeignKey('style_guide.id', ondelete='CASCADE'),
+        nullable=False)
 
     font_family = db.Column(
         db.Text
@@ -281,11 +281,123 @@ class UserTypeface(db.Model):
         db.Text
     )
 
-    variant = db.Column(
+    weight = db.Column(
         db.Text
     )
 
+    style = db.Column(
+        db.Text
+    )
+
+    url = db.Column(
+        db.Text
+    )
+
+    @classmethod
+    def add_variant(cls, style_guide_id, font_family, category, weight, style, url):
+        """
+        Add primary font variants to database
+        """
+
+        new_variant = TypefaceVariant(
+            style_guide_id=style_guide_id,
+            font_family=font_family,
+            category=category,
+            weight=weight,
+            style=style,
+            url=url
+        )
+
+        db.session.add(new_variant)
+        return new_variant
+
     # typesetting_styles = db.relationship('TypesettingStyle', backref='user_typefaces')
+
+
+
+def get_typeface_variants(style_guide_id, typeface):
+    res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
+
+    data = res.json()
+
+    base_url = 'https://fonts.googleapis.com/css?family='
+    base_url = base_url + (typeface.replace(" ", "+"))
+    typeface_variants = []
+
+    for item in data['items']:
+        
+        if item['family'] == typeface:
+            category = item['category']
+
+            for variant in item['variants']:
+                variant_url = base_url + ':' + variant
+
+                if variant == 'italic':
+                    weight = 'regular'
+                    style = 'italic'
+
+                    typeface_variant = dict(
+                        style_guide_id=style_guide_id,
+                        font_family=typeface,
+                        category=category,
+                        weight=weight,
+                        style=style,
+                        url=variant_url
+                        )
+                    
+                    typeface_variants.append(typeface_variant)
+
+                
+                elif variant == 'regular':
+                    weight = 'regular'
+                    style = 'normal'
+
+                    typeface_variant = dict(
+                        style_guide_id=style_guide_id,
+                        font_family=typeface,
+                        category=category,
+                        weight=weight,
+                        style=style,
+                        url=variant_url
+                        )
+                    
+                    typeface_variants.append(typeface_variant)
+
+                elif 'italic' in variant:
+                    weight = variant.removesuffix('italic')
+                    style = 'italic'
+
+                    typeface_variant = dict(
+                        style_guide_id=style_guide_id,
+                        font_family=typeface,
+                        category=category,
+                        weight=weight,
+                        style=style,
+                        url=variant_url
+                        )
+                    
+                    typeface_variants.append(typeface_variant)
+
+
+                else:
+                    weight = variant
+                    style = 'normal'
+
+                    typeface_variant = dict(
+                        style_guide_id=style_guide_id,
+                        font_family=typeface,
+                        category=category,
+                        weight=weight,
+                        style=style,
+                        url=variant_url
+                        )
+                    
+                    typeface_variants.append(typeface_variant)
+                
+    
+
+    print(typeface_variants)
+    return typeface_variants
 
 
 

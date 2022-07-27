@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
-from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, UserTypeface, TypesettingStyle, get_typeface_variants, get_variant_urls
+from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, get_variant_urls, get_variant_choices
 from sqlalchemy.exc import IntegrityError
 
 
@@ -164,6 +164,21 @@ def start_new_styleguide(username):
 
         # adds FORMS to session with no submitions
         session['style_guide'] = new_style_guide.id
+
+        variants = get_typeface_variants(new_style_guide.id, primary_typeface)
+        for variant in variants:
+            new_variant = TypefaceVariant.add_variant(
+                style_guide_id=variant.style_guide_id,
+                font_family=variant.font_family,
+                category=variant.category,
+                weight=variant.weight,
+                style=variant.style,
+                url=variant.url
+            )
+
+            db.session.add(new_variant)
+            db.session.commit()
+
         # redirects to first step/form page 
         return redirect(f"/style-guide/{new_style_guide.id}/typesetting/body")
 
@@ -188,8 +203,8 @@ def typesetting_body(style_guide_id):
     form = TypesettingForm()
     primary_typeface = style_guide.primary_typeface
     style_ref = 'p'
-    variants = get_typeface_variants(primary_typeface)
-    form.variant.choices = variants
+    form.variant.choices = get_variant_choices(primary_typeface)
+
 
     if form.validate_on_submit():
         variant=form.variant.data
@@ -204,7 +219,7 @@ def typesetting_body(style_guide_id):
         return redirect(f"/style-guide/{style_guide_id}/typesetting/h1")
 
         
-    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form, variants=variants)
+    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form)
 
 
 
