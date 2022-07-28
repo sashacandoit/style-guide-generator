@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
-from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, get_variant_urls, get_variant_choices
+from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, get_variant_urls, get_variant_choices, StyleRef
 from sqlalchemy.exc import IntegrityError
 
 
@@ -162,18 +162,19 @@ def start_new_styleguide(username):
         db.session.add(new_style_guide)
         db.session.commit()
 
-        # adds FORMS to session with no submitions
+        # adds new style guide to session
         session['style_guide'] = new_style_guide.id
 
+        # adds primary typeface variants to database
         variants = get_typeface_variants(new_style_guide.id, primary_typeface)
         for variant in variants:
             new_variant = TypefaceVariant.add_variant(
-                style_guide_id=variant.style_guide_id,
-                font_family=variant.font_family,
-                category=variant.category,
-                weight=variant.weight,
-                style=variant.style,
-                url=variant.url
+                style_guide_id=variant['style_guide_id'],
+                font_family=variant['font_family'],
+                category=variant['category'],
+                weight=variant['weight'],
+                style=variant['style'],
+                url=variant['url']
             )
 
             db.session.add(new_variant)
@@ -182,7 +183,7 @@ def start_new_styleguide(username):
         # redirects to first step/form page 
         return redirect(f"/style-guide/{new_style_guide.id}/typesetting/body")
 
-    # renders start page with stype guide title form
+    # renders start page with style guide title form
     return render_template('style_guide_new.html', user=user, form=form)
 
 
@@ -193,19 +194,35 @@ def start_new_styleguide(username):
 
 @app.route('/style-guide/<style_guide_id>/typesetting/body')
 def typesetting_body(style_guide_id):
+    """defines typesetting style for body content with TypeSettingForm using variants from primary typeface in style guide """
 
+    # retrieves style guide id from session 
     style_guide = StyleGuide.query.get(style_guide_id)
 
+    # gets typesetting description
+    style_ref_details = StyleRef.query.get('p')
+
+    # gets variants for primary typeface
+    primary_typeface = style_guide.primary_typeface
+    variants = TypefaceVariant.query.filter_by(style_guide_id=style_guide_id)
+
+    #checks that user is authorized to work with style guide
     if style_guide.username != session['username'] or "username" not in session:
         flash('Sorry, you are not authorized to view that page')
         return redirect('/')
 
+    # adds starting data to TypesettingForm 
     form = TypesettingForm()
-    primary_typeface = style_guide.primary_typeface
-    style_ref = 'p'
-    form.variant.choices = get_variant_choices(primary_typeface)
+    style_ref = style_ref_details.id
 
+    # gets variant select field choices
+    v_choices = []
+    for variant in variants:
+        v = (variant.weight + '-' + variant.style)
+        v_choices.append(v)
+    form.variant.choices = v_choices
 
+    #retrieve form data on submit and add to database
     if form.validate_on_submit():
         variant=form.variant.data
         text_size= form.text_size.data
@@ -216,10 +233,11 @@ def typesetting_body(style_guide_id):
         db.session.add(body_typesetting)
         db.session.commit()
 
+        #redirects to next TypesettingForm
         return redirect(f"/style-guide/{style_guide_id}/typesetting/h1")
 
-        
-    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form)
+    # renders page with Typesetting Form
+    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form, style_ref=style_ref_details, variants=variants)
 
 
 

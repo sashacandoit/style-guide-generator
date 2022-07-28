@@ -311,8 +311,6 @@ class TypefaceVariant(db.Model):
         db.session.add(new_variant)
         return new_variant
 
-    # typesetting_styles = db.relationship('TypesettingStyle', backref='user_typefaces')
-
 
 
 def get_typeface_variants(style_guide_id, typeface):
@@ -394,8 +392,6 @@ def get_typeface_variants(style_guide_id, typeface):
                     
                     typeface_variants.append(typeface_variant)
                 
-    
-
     print(typeface_variants)
     return typeface_variants
 
@@ -437,11 +433,8 @@ class TypesettingStyle(db.Model):
     )
 
     style_ref = db.Column(
-        # p, h1, h2, h3, h4, h5, h6
         db.Text
     )
-
-
 
 
 
@@ -449,6 +442,23 @@ def format_datetime():
     date_time = datetime.utcnow()
     format_date = date_time.strftime("%d %B, %Y")
     return format_date
+
+
+class StyleRef(db.Model):
+    ___tablename__ = 'style_refs'
+
+    id = db.Column (
+        db.Text,
+        primary_key=True
+    )
+
+    name = db.Column (
+        db.Text
+    )
+
+    description = db.Column (
+        db.Text
+    )
 
 
 #     def convert_color_to_rgb(self, color):
