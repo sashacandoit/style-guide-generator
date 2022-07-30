@@ -9,6 +9,7 @@
     .typeface-weight-set {
         font-family: "{{style_guide.primary_typeface}}";
     }
+
 </style>
 
 {% for variant in variants %}
@@ -37,18 +38,12 @@
 
             <div class="col-md-6">
                 <div class="row justify-content-between">
-
+                    {% for variant in variants %}
                     <div class="col-6 col-md-3">
-                        <span class="typeface-weight-set">Aa</span>
+                        <span style="font-weight:{{variant.weight}}; font-style:{{variant.style}}" class="typeface-weight-set">Aa</span>
                     </div>
-                
-                    <div class="col-6 col-md-3">
-                        <span class="typeface-weight-set">Aa</span>
-                    </div>
-                
-                    <div class="col-6 col-md-3">
-                        <span class="typeface-weight-set">Aa</span>
-                    </div>
+                    {% endfor %}
+                    
                 </div>
             </div><!-- / column -->
         </div><!-- / row -->

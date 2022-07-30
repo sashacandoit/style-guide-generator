@@ -331,7 +331,7 @@ def get_typeface_variants(style_guide_id, typeface):
                 variant_url = base_url + ':' + variant
 
                 if variant == 'italic':
-                    weight = 'regular'
+                    weight = '400'
                     style = 'italic'
 
                     typeface_variant = dict(
@@ -347,7 +347,7 @@ def get_typeface_variants(style_guide_id, typeface):
 
                 
                 elif variant == 'regular':
-                    weight = 'regular'
+                    weight = '400'
                     style = 'normal'
 
                     typeface_variant = dict(
