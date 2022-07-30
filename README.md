@@ -18,7 +18,7 @@ The [Colormind API](http://colormind.io/api-access/) Can generate a brand's colo
 
 #### Database Schema
 
-![](proposal/Capstone_1_schema_v2.png)
+![](proposal/Capstone_1_schema_v3.png)
 
 ------
 
