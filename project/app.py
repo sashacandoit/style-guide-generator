@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, ColorSchemeForm, TypesettingForm, NewStyleGuideForm
-from models import db, connect_db, User, APIFontStyle, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, get_variant_urls, get_variant_choices, StyleRef
+from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef
 from sqlalchemy.exc import IntegrityError
 
 
@@ -191,8 +191,11 @@ def start_new_styleguide(username):
 # TYPESETTING ROUTES
 ##################################
 
+########
+# BODY
+########
 
-@app.route('/style-guide/<style_guide_id>/typesetting/body')
+@app.route('/style-guide/<style_guide_id>/typesetting/body', methods=["GET", "POST"])
 def typesetting_body(style_guide_id):
     """defines typesetting style for body content with TypeSettingForm using variants from primary typeface in style guide """
 
@@ -236,10 +239,60 @@ def typesetting_body(style_guide_id):
         #redirects to next TypesettingForm
         return redirect(f"/style-guide/{style_guide_id}/typesetting/h1")
 
-    # renders page with Typesetting Form
+    # renders page with Typesetting Form and variants
     return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form, style_ref=style_ref_details, variants=variants)
 
 
+########
+# H1
+########
+
+@app.route('/style-guide/<style_guide_id>/typesetting/h1', methods=["GET", "POST"])
+def typesetting_h1(style_guide_id):
+    """defines typesetting style for h1 content with TypeSettingForm using variants from primary typeface in style guide """
+
+    # retrieves style guide id from session 
+    style_guide = StyleGuide.query.get(style_guide_id)
+
+    # gets typesetting description
+    style_ref_details = StyleRef.query.get('h1')
+
+    # gets variants for primary typeface
+    primary_typeface = style_guide.primary_typeface
+    variants = TypefaceVariant.query.filter_by(style_guide_id=style_guide_id)
+
+    #checks that user is authorized to work with style guide
+    if style_guide.username != session['username'] or "username" not in session:
+        flash('Sorry, you are not authorized to view that page')
+        return redirect('/')
+
+    # adds starting data to TypesettingForm 
+    form = TypesettingForm()
+    style_ref = style_ref_details.id
+
+    # gets variant select field choices
+    v_choices = []
+    for variant in variants:
+        v = (variant.weight + '-' + variant.style)
+        v_choices.append(v)
+    form.variant.choices = v_choices
+
+    #retrieve form data on submit and add to database
+    if form.validate_on_submit():
+        variant=form.variant.data
+        text_size= form.text_size.data
+        text_transform = form.text_transform.data
+
+        body_typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
+
+        db.session.add(body_typesetting)
+        db.session.commit()
+
+        #redirects to next TypesettingForm
+        return redirect(f"/style-guide/{style_guide_id}/typesetting/h2")
+
+    # renders page with Typesetting Form and variants
+    return render_template('style_guide_typesetting.html', style_guide=style_guide, form=form, style_ref=style_ref_details, variants=variants)
 
 
 
