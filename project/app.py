@@ -228,19 +228,16 @@ def typesetting_styles(style_guide_id, current_state):
         flash('Sorry, you are not authorized to view that page')
         return redirect('/')
 
-    # list of typesetting styles to generate form for
-    form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-
     # check session for current form state
     style_tag = current_state
+
     if "current_state" not in session:
         session['current_state'] = style_tag
 
-    if session['current_state']:
-        style_tag = session['current_state']
-
     style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, style_tag)
     
+    # list of typesetting styles to generate form for
+    form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 
     #retrieve form data on submit and add to database
     if form.validate_on_submit():
@@ -248,18 +245,20 @@ def typesetting_styles(style_guide_id, current_state):
         text_size= form.text_size.data
         text_transform = form.text_transform.data
 
-        body_typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
+        typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
 
-        db.session.add(body_typesetting)
+        db.session.add(typesetting)
         db.session.commit()
 
+        # check with style tag is next in the list, or if list is complete
         if form_flows.index(style_tag) + 1 < len(form_flows):
             style_tag = form_flows[form_flows.index(style_tag) + 1]
             session['current_state'] = style_tag
 
-            #redirects to next TypesettingForm
+            #redirects to next style tag TypesettingForm
             return redirect(f"/style-guide/{style_guide_id}/typesetting/{style_tag}")
 
+        # typesetting forms finished - load next form page
         return redirect(f"/style-guide/{style_guide_id}/color-scheme")
 
     # renders page with Typesetting Form and variants
