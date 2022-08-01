@@ -1,5 +1,5 @@
 from app import app
-from models import db, User, StyleGuide, TypefaceVariant, TypesettingStyle, APIFontStyle, StyleRef
+from models import db, User, StyleRef
 
 db.drop_all()
 db.create_all()
