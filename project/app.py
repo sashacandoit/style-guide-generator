@@ -196,6 +196,13 @@ def start_new_styleguide(username):
 def getTypesettingData(style_guide, tag_type):
     # gets typesetting description
     style_ref_details = StyleRef.query.get(tag_type)
+    print('**********************************')
+    print(f'1 - {style_ref_details}')
+    print('**********************************')
+    ################################
+    # First time returns the style_ref object 'p'  
+    # second time returns 'None'
+    ################################
 
     # gets variants for primary typeface
     primary_typeface = style_guide.primary_typeface
@@ -229,12 +236,13 @@ def typesetting_styles(style_guide_id, current_state):
         return redirect('/')
 
     # check session for current form state
-    style_tag = current_state
-
     if "current_state" not in session:
-        session['current_state'] = style_tag
+        session['current_state'] = 'p'
 
-    style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, style_tag)
+    else:
+        session['current_state'] = current_state
+
+    style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, session['current_state'])
     
     # list of typesetting styles to generate form for
     form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
@@ -249,10 +257,22 @@ def typesetting_styles(style_guide_id, current_state):
 
         db.session.add(typesetting)
         db.session.commit()
+        ################################
+        # something is going wrong here
+        ################################
 
-        # check with style tag is next in the list, or if list is complete
-        if form_flows.index(style_tag) + 1 < len(form_flows):
-            style_tag = form_flows[form_flows.index(style_tag) + 1]
+        print('**********************************')
+        print(f'2 - {typesetting.style_ref}')
+        print('**********************************')
+        ################################
+        # never executes
+        ################################
+        
+
+        # check which style tag is next in the list, or if list is complete
+        if form_flows.index(session['current_state']) + 1 < len(form_flows):
+            style_tag = form_flows[form_flows.index(style_ref) + 1]
+            
             session['current_state'] = style_tag
 
             #redirects to next style tag TypesettingForm
