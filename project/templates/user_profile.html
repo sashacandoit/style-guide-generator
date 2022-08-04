@@ -31,7 +31,7 @@
                                     <div class="col-md-6 mx-auto text-center">
                                         <i class="fas fa-layer-group fs-40 d-inline-block va-middle m-5 mr-20 text-primary"></i>
                                         <div class="d-inline-block va-middle">
-                                            <h4 class="timer mb-0 va-middle" id="count-one" data-to="27" data-speed="1500">27
+                                            <h4 class="timer mb-0 va-middle" id="count-one" data-to="27" data-speed="1500">{{ style_guides|length }}
                                             </h4>
                                             <p class="mb-0 text-sm text-primary">Style Guides</p>
                                         </div><!-- / d-inline-block -->
@@ -53,47 +53,24 @@
 <section class="big">
     <div class="container">
         <ul class="row portfolio list-unstyled mb-0">
+
             <!-- style guide -->
-            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
+            {% for style_guide in style_guides %}
+            <li class="col-md-4 project">
                 <div class="card">
                     <div class="card-body p-y-30 text-center">
                         <img class="img-responsive mb-20" src="../static/images/placeholder-mini.jpg" alt="">
-                        <a href="" class="card-title title-link primary-hover fs-20">Style Guide 1</a>
+                        <a href="" class="card-title title-link primary-hover fs-20">{{ style_guide.title }}</a>
                         <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
                             lacus...
                         </p>
-                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
+                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>{{ style_guide.timestamp.strftime("%B %d, %Y") }}</p>
                     </div><!-- / card-body -->
                 </div><!-- / card -->
             </li><!-- / style guide -->
+            {% endfor %}
         
-            <!-- style guide -->
-            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
-                <div class="card">
-                    <div class="card-body p-y-30 text-center">
-                        <img class="img-responsive mb-20" src="../../static/images/placeholder-mini.jpg" alt="">
-                        <a href="#x" class="card-title title-link primary-hover fs-20">Style Guide 2</a>
-                        <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
-                            lacus...
-                        </p>
-                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
-                    </div><!-- / card-body -->
-                </div><!-- / card -->
-            </li><!-- / style guide -->
-        
-            <!-- style guide -->
-            <li class="col-md-4 project" data-groups="[&quot;skill&quot;]">
-                <div class="card">
-                    <div class="card-body p-y-30 text-center">
-                        <img class="img-responsive mb-20" src="../static/images/placeholder-mini.jpg" alt="">
-                        <a href="#x" class="card-title title-link primary-hover fs-20">Style Guide 3</a>
-                        <p class="card-text mt-10 mb-10">Suspendisse in orci vitae sapien semper posuere. Mauris a gravida
-                            lacus...
-                        </p>
-                        <p class="fs-12 post-meta-small mt-15 mb-0"><i class="far fa-calendar-alt mr-5"></i>Jul 03, 2020 </p>
-                    </div><!-- / card-body -->
-                </div><!-- / card -->
-            </li><!-- / style guide -->
+            
         </ul>
     </div>
 </section>

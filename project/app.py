@@ -107,9 +107,10 @@ def show_user(username):
         return redirect('/login')
         
     user = User.query.get(username)
+    style_guides = StyleGuide.query.filter_by(username=username).all()
     form = DeleteForm()
 
-    return render_template('user_profile.html', user=user, form=form)
+    return render_template('user_profile.html', user=user, form=form, style_guides=style_guides)
 
 
 
@@ -243,6 +244,9 @@ def typesetting_styles(style_guide_id, current_state):
         session['current_state'] = current_state
 
     style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, session['current_state'])
+    print('****************************************')
+    print(style_ref_details, primary_typeface, variants, form, style_ref)
+    print('****************************************')
     
 
     #retrieve form data on submit and add to database
@@ -274,7 +278,7 @@ def typesetting_styles(style_guide_id, current_state):
         
         # list of typesetting styles to generate form for
         form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
-        
+
         # check which style tag is next in the list, or if list is complete
         if form_flows.index(session['current_state']) + 1 < len(form_flows):
             style_tag = form_flows[form_flows.index(style_ref) + 1]
