@@ -252,6 +252,12 @@ def typesetting_styles(style_guide_id, current_state):
         variant=form.variant.data
         text_size= form.text_size.data
         text_transform = form.text_transform.data
+        print('****************************************')
+        print(style_guide_id, primary_typeface, variant, text_size, text_transform)
+        print('****************************************')
+        ################################
+        # never executes
+        ################################
 
         typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
 
