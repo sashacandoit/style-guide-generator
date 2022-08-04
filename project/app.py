@@ -244,8 +244,6 @@ def typesetting_styles(style_guide_id, current_state):
 
     style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, session['current_state'])
     
-    # list of typesetting styles to generate form for
-    form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 
     #retrieve form data on submit and add to database
     if form.validate_on_submit():
@@ -274,7 +272,9 @@ def typesetting_styles(style_guide_id, current_state):
         # never executes
         ################################
         
-
+        # list of typesetting styles to generate form for
+        form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+        
         # check which style tag is next in the list, or if list is complete
         if form_flows.index(session['current_state']) + 1 < len(form_flows):
             style_tag = form_flows[form_flows.index(style_ref) + 1]
