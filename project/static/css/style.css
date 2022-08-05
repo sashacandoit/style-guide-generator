@@ -1,5 +1,42 @@
 /*---------- custom styling ----------*/
 
+/*-- User profile --*/
+
+/* style guide previews */
+.wrapper {
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(75px, auto);
+}
+
+.accent-1-box {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    background-color: #F2EEAC;
+}
+
+.accent-2-box {
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    background-color: #94C6F2;
+}
+
+
+.primary-dark-box {
+    grid-column: 2;
+    grid-row: 3;
+    background-color: #010B40;
+}
+
+.primary-light-box {
+    grid-column: 3;
+    grid-row: 3;
+    background-color: #F2F2F2;
+}
+
+
+
 /*-- style guide --*/
 
 /* color scheme */
