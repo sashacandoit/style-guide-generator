@@ -279,14 +279,39 @@ def color_scheme(style_guide_id):
     # retrieves style guide id from session 
     style_guide = StyleGuide.query.get(style_guide_id)
     form = ColorSchemeForm()
+    if not form.primary_light.data:
+        form.primary_light.data = '#F2F2F2'
+    if not form.accent_1.data:
+        form.accent_1.data = '#94C6F2'
+    if not form.accent_2.data:
+        form.accent_2.data = '#F2EEAC'
 
     #checks that user is authorized to work with style guide
     if style_guide.username != session['username'] or "username" not in session:
         flash('Sorry, you are not authorized to view that page')
         return redirect('/')
 
+    #retrieve form data on submit and add to database
+    if form.validate_on_submit():
+        style_guide.primary_dark_color = form.primary_dark.data
+        style_guide.primary_light_color = form.primary_light.data
+        style_guide.accent_1_color = form.accent_1.data
+        style_guide.accent_2_color = form.accent_2.data
+
+        print('*******************************')
+        print(form.primary_dark.data, form.primary_light.data, form.accent_1.data, form.accent_2.data)
+        print('*******************************')
+        db.session.commit()
+        return redirect(f"/style-guide/{style_guide_id}")
+
     return render_template('style_guide_color_scheme.html', style_guide=style_guide, form=form)
 
+
+@app.route('/style-guide/<style_guide_id>')
+def view_style_guide(style_guide_id):
+    style_guide = StyleGuide.query.get(style_guide_id)
+
+    return render_template('style_guide.html', style_guide=style_guide)
 
 
 

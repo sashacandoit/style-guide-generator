@@ -58,9 +58,9 @@ class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
     primary_dark = StringField('Primary Dark', widget=ColorInput())
-    primary_light = StringField('Primary Light')
-    accent_1 = StringField('Accent 1')
-    accent_2 = StringField('Accent 2')
+    primary_light = StringField('Primary Light', widget=ColorInput())
+    accent_1 = StringField('Accent 1', widget=ColorInput())
+    accent_2 = StringField('Accent 2', widget=ColorInput())
 
 
 class PrimaryTypefaceForm(FlaskForm):
