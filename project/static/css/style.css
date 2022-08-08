@@ -145,6 +145,14 @@
 }
 
 
+/* color scheme form */
+
+input.color-picker-box {
+    height: 150px;
+}
+
+
+
 /*---------- ui ----------*/
 .color-box {
   border: 4px solid #f5f7fe;

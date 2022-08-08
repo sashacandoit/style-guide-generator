@@ -3,8 +3,7 @@ from flask_wtf import FlaskForm
 # from flask_colorpicker import colorpicker
 from wtforms import StringField, PasswordField, SelectField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, NumberRange
-# from wtforms_components import ColorField
-# from wtforms.fields import ColorField
+from wtforms.widgets import ColorInput
 import email_validator
 
 
@@ -58,10 +57,10 @@ class NewStyleGuideForm(FlaskForm):
 class ColorSchemeForm(FlaskForm):
     """Form for defining user's color scheme for style guide"""
 
-    primary_dark = SubmitField('Primary Dark')
-    primary_light = SubmitField('Primary Light')
-    accent_1 = SubmitField('Accent 1')
-    accent_2 = SubmitField('Accent 2')
+    primary_dark = StringField('Primary Dark', widget=ColorInput())
+    primary_light = StringField('Primary Light')
+    accent_1 = StringField('Accent 1')
+    accent_2 = StringField('Accent 2')
 
 
 class PrimaryTypefaceForm(FlaskForm):
@@ -90,6 +89,9 @@ class TypesettingForm(FlaskForm):
         ('lowercase', 'lowercase')])
 
     style_ref = StringField('style_ref')
+
+
+
 
 
 # class StyleGuide():

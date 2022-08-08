@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_colorpicker import colorpicker
 
-from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, TypesettingForm, NewStyleGuideForm
+from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm
 from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef
 from sqlalchemy.exc import IntegrityError
 
@@ -200,10 +200,6 @@ def getTypesettingData(style_guide, tag_type):
     print('**********************************')
     print(f'1 - {style_ref_details}')
     print('**********************************')
-    ################################
-    # First time returns the style_ref object 'p'  
-    # second time returns 'None'
-    ################################
 
     # gets variants for primary typeface
     primary_typeface = style_guide.primary_typeface
@@ -240,41 +236,19 @@ def typesetting_styles(style_guide_id, current_state):
     if "current_state" not in session:
         session['current_state'] = 'p'
 
-    else:
-        session['current_state'] = current_state
 
     style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, session['current_state'])
-    print('****************************************')
-    print(style_ref_details, primary_typeface, variants, form, style_ref)
-    print('****************************************')
     
-
     #retrieve form data on submit and add to database
     if form.validate_on_submit():
         variant=form.variant.data
         text_size= form.text_size.data
         text_transform = form.text_transform.data
-        print('****************************************')
-        print(style_guide_id, primary_typeface, variant, text_size, text_transform)
-        print('****************************************')
-        ################################
-        # never executes
-        ################################
 
         typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
 
         db.session.add(typesetting)
         db.session.commit()
-        ################################
-        # something is going wrong here
-        ################################
-
-        print('**********************************')
-        print(f'2 - {typesetting.style_ref}')
-        print('**********************************')
-        ################################
-        # never executes
-        ################################
         
         # list of typesetting styles to generate form for
         form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
@@ -304,13 +278,14 @@ def typesetting_styles(style_guide_id, current_state):
 def color_scheme(style_guide_id):
     # retrieves style guide id from session 
     style_guide = StyleGuide.query.get(style_guide_id)
+    form = ColorSchemeForm()
 
     #checks that user is authorized to work with style guide
     if style_guide.username != session['username'] or "username" not in session:
         flash('Sorry, you are not authorized to view that page')
         return redirect('/')
 
-    return render_template('style_guide_color_scheme.html', style_guide=style_guide)
+    return render_template('style_guide_color_scheme.html', style_guide=style_guide, form=form)
 
 
 

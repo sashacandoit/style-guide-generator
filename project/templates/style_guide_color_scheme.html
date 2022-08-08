@@ -1,58 +1,82 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
 
-    <div class="row">
-        <div class="row">
-            <div class="col-md-3 mb-15">
-                <input class="form-control form-control-color" type="color" id="primary-dk" name="primary-dk" value="#010326">
-                <label class="form-label mt-10 pl-20 lead" for="primary-dk">Primary Dark</label>
-                <p class="text-sm pl-20">Hex: #010326</p>
-            </div><!-- / column -->
-        
-            <div class="col-md-3 mb-15">
-                <input class="form-control form-control-color" type="color" id="primary-lt" name="primary-lt" value="#F2F2F2">
-                <label class="form-label mt-10 pl-20 lead" for="primary-lt">Primary Light</label>
-                <p class="text-sm pl-20">Hex: #F2F2F2</p>
-            </div><!-- / column -->
-        
-            <div class="col-md-3 mb-15">
-                <input class="form-control form-control-color" type="color" id="accent-1" name="accent-1" value="#94C6F2">
-                <label class="form-label mt-10 pl-20 lead" for="accent-1">Accent 1</label>
-                <p class="text-sm pl-20">Hex: #94C6F2</p>
-            </div><!-- / column -->
-        
-            <div class="col-md-3 mb-15">
-                <input class="form-control form-control-color" type="color" id="accent-2" name="accent-2" value="#F2EEAC">
-                <label class="form-label mt-10 pl-20 lead" for="accent-2">Accent 2</label>
-                <p class="text-sm pl-20">Hex: #F2EEAC</p>
-            </div><!-- / column -->
+<section class="med">
+    <div class="container mt-40">
+        <div class="section-title-area mb-50">
+            <h3 class="section-title">Style Guide<span class="text-primary"> Color Scheme</span></h3>
+            <h5 class="section-sub-title">Now we'll choose the main color palette that sets the brand's identity.</h5>
         </div>
-
-        <form action="POST" class="form-control">
-            <div class="row">
-                {{ form.hidden_tag() }}
-                
-                {% for field in form
-                if field.widget.input_type != 'hidden' %}
-                
-                <div class="col-md-3 mb-15">
-                    {{ field(class_="form-control form-control-color", type_="color") }}
-                    {{ field.label(class_="form-label mt-10 pl-20 lead")}}
-                    <p class="text-sm pl-20">Hex: {{ field.data }}</p>
-                
-                </div><!-- / column -->
-                {% endfor %}
-            </div>
-            
-        </form>
-        
-
-        
     </div>
+</section>
 
-</div>
+<div class="container mt-20">
+    <div class="promo-box">
+        <form method="POST" class="">
+            <div class="row">
+    
+                {{ form.hidden_tag() }}
+
+            <div class="row align-items-center justify-content-between pb-50">
+                <div class="col-md-5 pl-40">
+                    <h6>Primary Colors</h6>
+                    <p class="">
+                        Primary colors help consumers to quickly identify a brand. They are typically incorporated into the logo, main headings, and highlighted sections.
+                    </p>
+                </div><!-- / column -->
+            
+                <div class="col-md-6">
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 mb-15">
+                            {{ form.primary_dark(class_="form-control color-picker-box", type_="color") }}
+                            {{ form.primary_dark.label(class_="form-label mt-10 pl-20 lead")}}
+                        </div><!-- / column -->
+
+                        <div class="col-md-6 mb-15">
+                            {{ form.primary_light(class_="form-control color-picker-box", type_="color", value_="#F2F2F2") }}
+                            {{ form.primary_light.label(class_="form-label mt-10 pl-20 lead")}}
+                        </div><!-- / column -->
+                    </div><!-- / row -->
+                </div><!-- / column -->
+            </div><!-- / row -->
+
+            <div class="row align-items-center justify-content-between mt-50">
+                <div class="col-md-5 pl-40">
+                    <h6>Accent Colors</h6>
+                    <p class="">
+                        Accent colors are secondary brand colors that highlight and compliment the primary colors. They are typically incorporated into buttons, links, and highlighted text elements.
+                    </p>
+                </div><!-- / column -->
+            
+                <div class="col-md-6">
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 mb-15">
+                            {{ form.accent_1(class_="form-control color-picker-box", type_="color", value_="#94C6F2") }}
+                            {{ form.accent_1.label(class_="form-label mt-10 pl-20 lead")}}
+
+                        </div><!-- / column -->
+
+                        <div class="col-md-6 mb-15">
+                            {{ form.accent_2(class_="form-control color-picker-box", type_="color", value_="#F2EEAC") }}
+                            {{ form.accent_2.label(class_="form-label mt-10 pl-20 lead")}}
+
+                        </div><!-- / column -->
+                    </div><!-- / row -->
+                </div><!-- / column -->
+            </div><!-- / row -->
+
+            <div class="row mt-40 align-items-end justify-content-end">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary-gradient pill btn-lg w-100">Submit</button>
+                </div><!-- / column -->
+            </div><!-- / row -->
+        </form><!-- / form -->
+    </div><!-- / promo-box -->
+</div><!-- / container -->
+
+
+
 
 
 {% endblock %}

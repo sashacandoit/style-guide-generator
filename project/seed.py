@@ -64,3 +64,14 @@ h6 = StyleRef(
 
 db.session.add_all([p,h1,h2,h3,h4,h5,h6])
 db.session.commit()
+
+
+# sample style guides
+
+username = 'sashacandoit'
+title = 'Sample Title 1'
+primary_typeface = 'Lora'
+primary_dark_color = '#0D0D0D'
+primary_light_color = '#F2F2F2'
+accent_1_color = '#D99F59'
+accent_1_color = '#327361'
