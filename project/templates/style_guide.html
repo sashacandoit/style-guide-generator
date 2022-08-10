@@ -1,12 +1,31 @@
 {% extends 'base.html' %}
+
+{% block styles %}
+
+<style type="text/css">
+    .primary-typeface-set {
+        font-family: "{{style_guide.primary_typeface}}";
+    }
+
+    .typeface-weight-set {
+        font-family: "{{style_guide.primary_typeface}}";
+    }
+</style>
+
+{% for variant in variants %}
+<link rel="stylesheet" href={{variant.url}}>
+{% endfor %}
+
+{% endblock %}
+
 {% block content %}
 <!-- Style Guide Info Section -->
 <section class="lg">
     <div class="container">
         <div class="section-title-area text-end">
-            <h2 class="section-title" >Style Guide Title</h3>
-            <p class="lead"><span class="fw-bold">Designed by: </span>Sasha C</p>
-            <p class="lead"><span class="fw-bold">Last edited: </span>July 14, 2022</p>
+            <h2 class="section-title" >{{ style_guide.title }}</h3>
+            <p class="lead"><span class="fw-bold">Designed by: </span>{{ style_guide.user.full_name }}</p>
+            <p class="lead"><span class="fw-bold">Last edited: </span>{{ style_guide.timestamp.strftime("%B %d, %Y") }}</p>
         </div>
     </div>
 </section>
@@ -26,37 +45,37 @@
 
                     <div class="col-6 col-md-3 bg-white">
                         <div class="p-20 bg-white">
-                            <div class="color-scheme-block" style="background-color:black">
+                            <div class="color-scheme-block" style="background-color:{{style_guide.primary_dark_color}}">
                             </div>
                             <div class="p-y-5">
-                                <b>Primary Dark</b><span class="d-block fs-12">#393a3e</span>
+                                <b>Primary Dark</b><span class="d-block fs-12">{{ style_guide.primary_dark_color }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 bg-white">
                         <div class="p-20 bg-white">
-                            <div class="color-scheme-block" style="background-color:black">
+                            <div class="color-scheme-block" style="background-color:{{style_guide.primary_light_color}}">
                             </div>
                             <div class="p-y-5">
-                                <b>Primary Dark</b><span class="d-block fs-12">#393a3e</span>
+                                <b>Primary Light</b><span class="d-block fs-12">{{ style_guide.primary_light_color }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 bg-white">
                         <div class="p-20 bg-white">
-                            <div class="color-scheme-block" style="background-color:black">
+                            <div class="color-scheme-block" style="background-color:{{style_guide.accent_1_color}}">
                             </div>
                             <div class="p-y-5">
-                                <b>Primary Dark</b><span class="d-block fs-12">#393a3e</span>
+                                <b>Accent 1</b><span class="d-block fs-12">{{ style_guide.accent_1_color }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 bg-white">
                         <div class="p-20 bg-white">
-                            <div class="color-scheme-block" style="background-color:black">
+                            <div class="color-scheme-block" style="background-color:{{style_guide.accent_2_color}}">
                             </div>
                             <div class="p-y-5">
-                                <b>Primary Dark</b><span class="d-block fs-12">#393a3e</span>
+                                <b>Accent 2</b><span class="d-block fs-12">{{ style_guide.accent_2_color }}</span>
                             </div>
                         </div>
                     </div>
@@ -74,20 +93,14 @@
             </div>
             <div class="col-lg-9 bg-white pt-30 pb-50">
                 <div class="row p-x-40">
-                    <span class="primary-typeface">Font</span>
+                    <span class="primary-typeface-set">{{ style_guide.primary_typeface }}</span>
                 </div>
                 <div class="row p-x-40">
-                    <div class="col-6 col-md-3 bg-white">
-                        <span class="typeface-weight">Aa</span>
+                    {% for variant in variants %}
+                    <div class="col-6 col-md-3">
+                        <span style="font-weight:{{variant.weight}}; font-style:{{variant.style}}" class="typeface-weight-set">Aa</span>
                     </div>
-
-                    <div class="col-6 col-md-3 bg-white">
-                        <span class="typeface-weight">Aa</span>
-                    </div>
-
-                    <div class="col-6 col-md-3 bg-white">
-                        <span class="typeface-weight">Aa</span>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -105,23 +118,18 @@
                 <div class="row p-x-40 align-items-end ts-h1-row">
                     <div class="col-8">
                         <div class="h1 sg-h1 m-y-0">Display</div>
+                        <div class="fw-light"><b>H1</b> 48px, bold-700</div>
                     </div>
-                    <div class="col-4 h1-color-dots">
+                    <div class="col-4 color-dots">
                         <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
+                            <div class="color-dot" style="background-color: {{primary_dark_color}};"></div>
+                            <div class="color-dot" style="background-color: {{primary_light_color}};"></div>
+                        </div>
+                        <div class="row">
+                            <div class="fw-light ts-uses">Splash, Modal Titles</div>
                         </div>
                     </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>H1</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Splash, Modal Titles</div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="spacer-50"></div>

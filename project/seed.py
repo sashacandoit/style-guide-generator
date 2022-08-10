@@ -1,5 +1,6 @@
 from app import app
-from models import db, User, StyleRef
+from models import db, User, StyleRef, StyleGuide
+from project.models import TypesettingStyle
 
 db.drop_all()
 db.create_all()
@@ -66,7 +67,7 @@ db.session.add_all([p,h1,h2,h3,h4,h5,h6])
 db.session.commit()
 
 
-# sample style guides
+# Add sample style guide
 
 username = 'sashacandoit'
 title = 'Sample Title 1'
@@ -74,4 +75,77 @@ primary_typeface = 'Lora'
 primary_dark_color = '#0D0D0D'
 primary_light_color = '#F2F2F2'
 accent_1_color = '#D99F59'
-accent_1_color = '#327361'
+accent_2_color = '#327361'
+
+sample_guide = StyleGuide(username, title, primary_typeface, primary_dark_color, primary_light_color, accent_1_color, accent_2_color)
+
+db.session.add(sample_guide)
+db.session.commit()
+
+
+p = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="400normal",
+    text_size=16,
+    text_transform="None",
+    style_ref='p'
+)
+
+h1 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="600normal",
+    text_size=48,
+    text_transform="uppercase",
+    style_ref='h1'
+)
+
+h2 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="400normal",
+    text_size=40,
+    text_transform="capitalize",
+    style_ref='h2'
+)
+
+h3 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="400normal",
+    text_size=32,
+    text_transform="uppercase",
+    style_ref='h3'
+)
+
+h4 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="600normal",
+    text_size=26,
+    text_transform="uppercase",
+    style_ref='h4'
+)
+
+h5 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="600normal",
+    text_size=20,
+    text_transform="capitalize",
+    style_ref='h5'
+)
+
+h6 = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    variant="600normal",
+    text_size=18,
+    text_transform="None",
+    style_ref='h6'
+)
+
+db.session.add_all([p,h1,h2,h3,h4,h5,h6])
+db.session.commit()
+

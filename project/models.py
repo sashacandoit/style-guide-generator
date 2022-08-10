@@ -3,8 +3,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from datetime import datetime
-import webcolors 
-from webcolors import name_to_rgb, hex_to_rgb
 import requests
 import json
 from api_keys import GOOGLE_API_KEY
@@ -340,6 +338,8 @@ class TypesettingStyle(db.Model):
     style_ref = db.Column(
         db.Text
     )
+
+
 
 
 

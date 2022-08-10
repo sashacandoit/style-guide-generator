@@ -86,6 +86,12 @@
     margin-right: 20px;
 }
 
+.ts-uses {
+    padding-left: 0;
+    padding-top: 10px;
+}
+
+
 /* buttons */
 .sg-dark-btn {
     height: 50px;
@@ -135,13 +141,13 @@
 .primary-typeface-set {
     font-size: 72px;
     line-height: 76px;
-    color: #c9d0f4;
+    /* color: #c9d0f4; */
 }
 
 .typeface-weight-set {
     font-size: 62px;
     line-height: 76px;
-    color: #c9d0f4;
+    /* color: #c9d0f4; */
 }
 
 
