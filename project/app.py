@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 import webcolors 
 from webcolors import hex_to_rgb
 from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm
-from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef
+from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef, StyleColor
 from sqlalchemy.exc import IntegrityError
 
 
@@ -198,9 +198,6 @@ def start_new_styleguide(username):
 def getTypesettingData(style_guide, tag_type):
     # gets typesetting description
     style_ref_details = StyleRef.query.get(tag_type)
-    print('**********************************')
-    print(f'1 - {style_ref_details}')
-    print('**********************************')
 
     # gets variants for primary typeface
     primary_typeface = style_guide.primary_typeface

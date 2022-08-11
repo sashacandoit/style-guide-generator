@@ -336,7 +336,8 @@ class TypesettingStyle(db.Model):
     )
 
     style_ref = db.Column(
-        db.Text
+        db.Text, 
+        db.ForeignKey('style_ref.id', ondelete='CASCADE')
     )
 
 
@@ -358,6 +359,44 @@ class StyleRef(db.Model):
     description = db.Column (
         db.Text
     )
+
+    uses = db.Column (
+        db.Text
+    )
+
+    colors = db.Column (
+        db.Text
+    )
+
+
+class StyleColor(db.Model):
+    __tablename__ = 'style_colors'
+
+    id = db.Column (
+        db.Integer,
+        primary_key=True,
+        auto_increment=True
+    )
+
+    style_ref = db.Column(
+        db.Text, 
+        db.ForeignKey('style_ref.id', ondelete='CASCADE')
+    )
+
+    color = db.Column(
+        db.Text
+    )
+
+
+    @classmethod
+    def add_pair(cls, style_ref, color):
+        pair = StyleColor(
+            style_ref=style_ref,
+            color=color
+        )
+
+        db.session.add(pair)
+        return pair
 
 
 

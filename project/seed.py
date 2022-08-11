@@ -1,9 +1,9 @@
 from app import app
-from models import db, User, StyleRef, StyleGuide
-from project.models import TypesettingStyle
+from models import db, User, StyleRef, StyleGuide, TypesettingStyle, StyleColor
 
 db.drop_all()
 db.create_all()
+
 
 # Create starting user
 username = 'sashacandoit'
@@ -20,64 +20,97 @@ db.session.commit()
 
 
 # Add style refs to database
-
 p = StyleRef(
     id='p',
     name='Body',
-    description='This is the main font used for your brand. Use this for all paragraphs, descriptions, and any large blocks of text.'
+    description='This is the main font used for your brand. Use this for all paragraphs, descriptions, and any large blocks of text.',
+    uses='Body, Station Details'
 )
 
 h1 = StyleRef(
     id='h1',
     name='Display',
-    description='This is your largest typesetting. Display headers are mostly used as a Primary heading, Splash headings, and Modal titles.'
+    description='This is your largest typesetting. Display headers are mostly used as a Primary heading, Splash headings, and Modal titles.',
+    uses='Splash, Modal Titles'
 )
 
 h2 = StyleRef(
     id='h2',
     name='Header',
-    description='This is usually your second largest typesetting. Headers are mostly used for Large Section Titles and to break up content areas.'
+    description='This is usually your second largest typesetting. Headers are mostly used for Large Section Titles and to break up content areas.',
+    uses='Page Titles'
 )
 
 h3 = StyleRef(
     id='h3',
     name='Title',
-    description='Title headings are used to break up content within Large Sections. They are usually used for smaller Section Titles, Form Titles and Tabs.'
+    description='Title headings are used to break up content within Large Sections. They are usually used for smaller Section Titles, Form Titles and Tabs.',
+    uses='Titles, Forms, Tabs'
 )
 
 h4 = StyleRef(
     id='h4',
     name='Subheader',
-    description='Subheaders provide suplementary descriptions for small sections. they are usually used to highlight important information, Instructions, and Table Titles'
+    description='Subheaders provide suplementary descriptions for small sections. they are usually used to highlight important information, Instructions, and Table Titles',
+    uses='Forms, Table Titles, Tabs'
 )
 
 h5 = StyleRef(
     id='h5',
     name='Headline',
-    description='Headlines are used to highlight important blocks of text and Info Paragraphs. They are usually longer than the other headers but not as long as body content.'
+    description='Headlines are used to highlight important blocks of text and Info Paragraphs. They are usually longer than the other headers but not as long as body content.',
+    uses='Info Paragraphs'
 )
 
 h6 = StyleRef(
     id='h6',
     name='Buttons',
-    description='Button styles are usually larger than your body content and are meant to grab the attention of users.'
+    description='Button styles are usually larger than your body content and are meant to grab the attention of users.',
+    uses='Buttons'
 )
 
-db.session.add_all([p,h1,h2,h3,h4,h5,h6])
+a = StyleRef(
+    id='a',
+    name='Inline Link',
+    description=None,
+    uses='Inline Links'
+)
+
+db.session.add_all([p,h1,h2,h3,h4,h5,h6,a])
 db.session.commit()
 
 
-# Add sample style guide
+# add style ref colors to database
+style_color_groups = {
+    'p':['primary_dark_color', 'primary_light_color'],
+    'h1':['primary_dark_color', 'primary_light_color'],
+    'h2':['primary_dark_color', 'primary_light_color'],
+    'h3':['primary_dark_color', 'primary_light_color', 'accent_1_color', 'accent_2_color'],
+    'h4':['primary_dark_color', 'primary_light_color', 'accent_1_color', 'accent_2_color'],
+    'h5':['primary_dark_color', 'primary_light_color', 'accent_1_color', 'accent_2_color'],
+    'h6':['accent_1_color', 'accent_2_color'],
+    'a':['accent_1_color', 'accent_2_color']
+    }
 
-username = 'sashacandoit'
-title = 'Sample Title 1'
-primary_typeface = 'Lora'
-primary_dark_color = '#0D0D0D'
-primary_light_color = '#F2F2F2'
-accent_1_color = '#D99F59'
-accent_2_color = '#327361'
+style_colors = [
+    StyleColor.add_pair(key, value)
+    for key, values in style_color_groups.items()
+    for value in values
+    ]
 
-sample_guide = StyleGuide(username, title, primary_typeface, primary_dark_color, primary_light_color, accent_1_color, accent_2_color)
+db.session.add_all(style_colors)
+db.session.commit()
+
+
+
+sample_guide = StyleGuide(
+    username = 'sashacandoit',
+    title = 'Sample Title 1',
+    primary_typeface = 'Lora',
+    primary_dark_color = '#0D0D0D',
+    primary_light_color = '#F2F2F2',
+    accent_1_color = '#D99F59',
+    accent_2_color = '#327361')
 
 db.session.add(sample_guide)
 db.session.commit()
