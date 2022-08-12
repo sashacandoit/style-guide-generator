@@ -239,11 +239,14 @@ def typesetting_styles(style_guide_id, current_state):
     
     #retrieve form data on submit and add to database
     if form.validate_on_submit():
-        variant=form.variant.data.replace('-', '')
+        variant=form.variant.data.split('-',1)
+        font_weight=variant[0]
+        font_style=variant[1]
+        # variant=form.variant.data.replace('-', '')
         text_size= form.text_size.data
         text_transform = form.text_transform.data
 
-        typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, variant=variant, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
+        typesetting = TypesettingStyle(style_guide_id=style_guide_id, typeface=primary_typeface, font_weight=font_weight, font_style=font_style, text_size=text_size, text_transform=text_transform, style_ref=style_ref)
 
         db.session.add(typesetting)
         db.session.commit()
@@ -318,6 +321,7 @@ def view_style_guide(style_guide_id):
 
     typesettings = TypesettingStyle.query.filter_by(style_guide_id=style_guide.id)
 
+
     # for typesetting in typesettings:
     #     style_ref = typesetting.style_ref
     #     typeface = typesetting.typeface
@@ -335,6 +339,5 @@ def view_style_guide(style_guide_id):
     #     return styles
 
 
-    #Need to join the style_ref descriptions with typesettings to get matching display names
 
     return render_template('style_guide.html', variants=variants, typesettings=typesettings, style_guide=style_guide)

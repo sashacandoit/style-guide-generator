@@ -322,7 +322,11 @@ class TypesettingStyle(db.Model):
         db.Text
     )
 
-    variant = db.Column(
+    font_weight = db.Column(
+        db.Text
+    )
+
+    font_style = db.Column(
         db.Text
     )
 
@@ -364,9 +368,8 @@ class StyleRef(db.Model):
         db.Text
     )
 
-    colors = db.Column (
-        db.Text
-    )
+    colors = db.relationship("StyleColor")
+    
 
 
 class StyleColor(db.Model):

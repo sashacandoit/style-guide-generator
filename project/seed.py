@@ -1,5 +1,5 @@
 from app import app
-from models import db, User, StyleRef, StyleGuide, TypesettingStyle, StyleColor
+from models import db, User, StyleRef, StyleGuide, TypesettingStyle, StyleColor, get_typeface_variants, TypefaceVariant
 
 db.drop_all()
 db.create_all()
@@ -119,7 +119,8 @@ db.session.commit()
 p = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="400normal",
+    font_weight="400",
+    font_style="normal",
     text_size=16,
     text_transform="None",
     style_ref='p'
@@ -128,7 +129,8 @@ p = TypesettingStyle(
 h1 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="600normal",
+    font_weight="600",
+    font_style='normal',
     text_size=48,
     text_transform="uppercase",
     style_ref='h1'
@@ -137,7 +139,8 @@ h1 = TypesettingStyle(
 h2 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="400normal",
+    font_weight="400",
+    font_style="normal",
     text_size=40,
     text_transform="capitalize",
     style_ref='h2'
@@ -146,7 +149,8 @@ h2 = TypesettingStyle(
 h3 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="400normal",
+    font_weight="400",
+    font_style="normal",
     text_size=32,
     text_transform="uppercase",
     style_ref='h3'
@@ -155,7 +159,8 @@ h3 = TypesettingStyle(
 h4 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="600normal",
+    font_weight="600",
+    font_style="normal",
     text_size=26,
     text_transform="uppercase",
     style_ref='h4'
@@ -164,7 +169,8 @@ h4 = TypesettingStyle(
 h5 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="600normal",
+    font_weight="600",
+    font_style="normal",
     text_size=20,
     text_transform="capitalize",
     style_ref='h5'
@@ -173,7 +179,8 @@ h5 = TypesettingStyle(
 h6 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
-    variant="600normal",
+    font_weight="600",
+    font_style="normal",
     text_size=18,
     text_transform="None",
     style_ref='h6'
@@ -182,3 +189,17 @@ h6 = TypesettingStyle(
 db.session.add_all([p,h1,h2,h3,h4,h5,h6])
 db.session.commit()
 
+variants = get_typeface_variants(sample_guide.id, 'Lora')
+
+for variant in variants:
+    new_variant = TypefaceVariant.add_variant(
+        style_guide_id=variant['style_guide_id'],
+        font_family=variant['font_family'],
+        category=variant['category'],
+        weight=variant['weight'],
+        style=variant['style'],
+        url=variant['url']
+    )
+
+    db.session.add(new_variant)
+    db.session.commit()

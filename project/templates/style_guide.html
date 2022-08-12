@@ -115,10 +115,11 @@
             <div class="col-lg-9 bg-white pt-70 pb-50">
 
                 <!-- Typesetting Display Row -->
+                {% for typesetting in typesettings %}
                 <div class="row p-x-40 align-items-end ts-h1-row">
                     <div class="col-8">
-                        <div class="h1 sg-h1 m-y-0">Display</div>
-                        <div class="fw-light"><b>H1</b> 48px, bold-700</div>
+                        <div style="font-family: {{typesetting.typeface}}; font-size: {{typesetting.text_size}}; font-weight: {{typesetting.font_weight}}; font-style: {{typesetting.font_style}}" class="m-y-0">{{ typesetting.style_ref.name }}</div>
+                        <div class="fw-light"><b class="text-uppercase">{{ typesetting.style_ref }}</b> {{ typesetting.text_size }}px, {{ typesetting.font_style }}-{{ typesetting.font_weight}}</div>
                     </div>
                     <div class="col-4 color-dots">
                         <div class="row">
@@ -126,11 +127,12 @@
                             <div class="color-dot" style="background-color: {{primary_light_color}};"></div>
                         </div>
                         <div class="row">
-                            <div class="fw-light ts-uses">Splash, Modal Titles</div>
+                            <div class="fw-light ts-uses">{{ typesetting.style_ref.uses }}</div>
                         </div>
                     </div>
                     
                 </div>
+                {% endfor %}
 
                 <div class="spacer-50"></div>
 
