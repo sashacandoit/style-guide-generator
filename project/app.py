@@ -321,6 +321,8 @@ def view_style_guide(style_guide_id):
 
     typesettings = TypesettingStyle.query.filter_by(style_guide_id=style_guide.id)
 
+    
+
 
     # for typesetting in typesettings:
     #     style_ref = typesetting.style_ref

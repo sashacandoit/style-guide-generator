@@ -116,16 +116,6 @@ db.session.add(sample_guide)
 db.session.commit()
 
 
-p = TypesettingStyle(
-    style_guide_id=sample_guide.id,
-    typeface=sample_guide.primary_typeface,
-    font_weight="400",
-    font_style="normal",
-    text_size=16,
-    text_transform="None",
-    style_ref='p'
-)
-
 h1 = TypesettingStyle(
     style_guide_id=sample_guide.id,
     typeface=sample_guide.primary_typeface,
@@ -186,7 +176,27 @@ h6 = TypesettingStyle(
     style_ref='h6'
 )
 
-db.session.add_all([p,h1,h2,h3,h4,h5,h6])
+p = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    font_weight="400",
+    font_style="normal",
+    text_size=16,
+    text_transform="None",
+    style_ref='p'
+)
+
+a = TypesettingStyle(
+    style_guide_id=sample_guide.id,
+    typeface=sample_guide.primary_typeface,
+    font_weight="400",
+    font_style="normal",
+    text_size=16,
+    text_transform="None",
+    style_ref='a'
+)
+
+db.session.add_all([h1,h2,h3,h4,h5,h6, p, a])
 db.session.commit()
 
 variants = get_typeface_variants(sample_guide.id, 'Lora')

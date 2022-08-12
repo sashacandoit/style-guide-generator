@@ -10,6 +10,15 @@
     .typeface-weight-set {
         font-family: "{{style_guide.primary_typeface}}";
     }
+
+    .ts-name-a {
+        color: {{style_guide.accent_1_color}};
+    }
+
+    .section-sample-splash, .section-sample-body > h1, h2, h3, h4, h5, p, div {
+        font-family: "{{style_guide.primary_typeface}}";
+    }
+
 </style>
 
 {% for variant in variants %}
@@ -114,11 +123,11 @@
             </div>
             <div class="col-lg-9 bg-white pt-70 pb-50">
 
-                <!-- Typesetting Display Row -->
+                <!-- Typesetting Section -->
                 {% for typesetting in typesettings %}
-                <div class="row p-x-40 align-items-end ts-h1-row">
+                <div class="row p-x-40 align-items-end ts-h1-row mb-40">
                     <div class="col-8">
-                        <div style="font-family: {{typesetting.typeface}}; font-size: {{typesetting.text_size}}; font-weight: {{typesetting.font_weight}}; font-style: {{typesetting.font_style}}" class="m-y-0">{{ typesetting.style_ref.name }}</div>
+                        <div style="font-family: {{typesetting.typeface}}; font-size: {{typesetting.text_size}}px; font-weight: {{typesetting.font_weight}}; font-style: {{typesetting.font_style}}" class="m-y-0 ts-name-{{typesetting.style_ref}}">{{ typesetting.style_ref_details.name }}</div>
                         <div class="fw-light"><b class="text-uppercase">{{ typesetting.style_ref }}</b> {{ typesetting.text_size }}px, {{ typesetting.font_style }}-{{ typesetting.font_weight}}</div>
                     </div>
                     <div class="col-4 color-dots">
@@ -126,188 +135,14 @@
                             <div class="color-dot" style="background-color: {{primary_dark_color}};"></div>
                             <div class="color-dot" style="background-color: {{primary_light_color}};"></div>
                         </div>
+                        
                         <div class="row">
-                            <div class="fw-light ts-uses">{{ typesetting.style_ref.uses }}</div>
+                            <div class="fw-light ts-uses">{{ typesetting.style_ref_details.uses }}</div>
                         </div>
                     </div>
                     
                 </div>
                 {% endfor %}
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Header Row -->
-                <div class="row p-x-40 align-items-end ts-h2-row">
-                    <div class="col-8">
-                        <div class="h2 sg-h2 m-y-0">Header</div>
-                    </div>
-                    <div class="col-4 h2-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>H2</b> 40px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Page Titles</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Title Row -->
-                <div class="row p-x-40 align-items-end ts-h3-row">
-                    <div class="col-8">
-                        <div class="h3 sg-h3 m-y-0">Title</div>
-                    </div>
-                    <div class="col-4 h3-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>H3</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Titles, Forms, Tabs</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Subheader Row -->
-                <div class="row p-x-40 align-items-end ts-h4-row">
-                    <div class="col-8">
-                        <div class="h4 sg-h4 m-y-0">Subheader</div>
-                    </div>
-                    <div class="col-4 h4-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>H4</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Forms, Table Titles, Tabs</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Headline Row -->
-                <div class="row p-x-40 align-items-end ts-h5-row">
-                    <div class="col-8">
-                        <div class="h5 sg-h5 m-y-0">Headline</div>
-                    </div>
-                    <div class="col-4 h5-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>h5</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Info Paragraphs</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Button Row -->
-                <div class="row p-x-40 align-items-end ts-h6-row">
-                    <div class="col-8">
-                        <div class="h6 sg-h6 m-y-0">Button</div>
-                    </div>
-                    <div class="col-4 h6-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>H6</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Buttons</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Body Row -->
-                <div class="row p-x-40 align-items-end ts-body-row">
-                    <div class="col-8">
-                        <div class="sg-body m-y-0">Body</div>
-                    </div>
-                    <div class="col-4 body-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>P</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Body, Station Details</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spacer-50"></div>
-
-                <!-- Typesetting Link Row -->
-                <div class="row p-x-40 align-items-end ts-link-row">
-                    <div class="col-8">
-                        <div class="sg-link m-y-0" style="color: teal;">Inline Link</div>
-                    </div>
-                    <div class="col-4 link-color-dots">
-                        <div class="row">
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                            <div class="color-dot"></div>
-                        </div>
-                    </div>
-                    <div class="row align-items-end ts-descriptions pt-10">
-                        <div class="col-8">
-                            <div class="fw-light"><b>P</b> 48px, bold-700</div>
-                        </div>
-                        <div class="col-4">
-                            <div class="fw-light">Links</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- End of Typesetting Section -->
@@ -321,17 +156,17 @@
                 <div class="row p-x-40">
                     <!-- Primary Button Main -->
                     <div class="col-5 p-20 bg-white">
-                        <div class="sg-dark-btn text-center p-x-10 mb-20" style="background-color:black">
+                        <div class="sg-dark-btn text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
                             <span class="h6">Primary button</span>
                         </div>
 
                         <!-- Primary Button Pressed State -->
-                        <div class="sg-dark-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:black">
+                        <div class="sg-dark-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
                             <span class="h6">Pressed State</span>
                         </div>
 
                         <!-- Primary Button Deactivated State -->
-                        <div class="sg-dark-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:black">
+                        <div class="sg-dark-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
                             <span class="h6">Deactivated State</span>
                         </div>
                     </div>
@@ -339,17 +174,17 @@
                     <!-- Secondary Button -->
                     <div class="col-4 p-20 bg-white">
                         <!-- Secondary Button Main State -->
-                        <div class="sg-light-btn text-center p-x-10 mb-20" style="background-color:rgb(196, 195, 195)">
+                        <div class="sg-dark-btn text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
                             <span class="h6">Secondary button</span>
                         </div>
 
                         <!-- Secondary Button Pressed State -->
-                        <div class="sg-light-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:rgb(196, 195, 195)">
+                        <div class="sg-dark-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
                             <span class="h6">Pressed State</span>
                         </div>
                         
                         <!-- Secondary Button Deactivated State -->
-                        <div class="sg-light-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:rgb(196, 195, 195)">
+                        <div class="sg-dark-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
                             <span class="h6">Deactivated State</span>
                         </div>
                     </div>
@@ -366,10 +201,10 @@
             </div>
             <div class="col-lg-9 bg-white pt-30 pb-50">
                 <div class="col p-20 bg-white">
-                    <div class="promo-box section-sample-box p-x-40 m-x-40">
+                    <div class="promo-box section-sample-splash p-x-40 m-x-40">
                        <h1>This Is A Display Header</h1>
                        <h5>This is Headline copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere quod, incidunt rerum eveniet culpa quaerat dignissimos consequatur voluptates aperiam totam eaque? Corrupti magnam ex accusamus, officiis eligendi dicta.</h5> 
-                        <div class="sg-dark-btn text-center p-x-10 mt-30 mb-20" style="background-color:black">
+                        <div class="sg-dark-btn text-center p-x-10 mt-30 mb-20" style="background-color:{{style_guide.accent_1_color}}">
                             <span class="h6">Primary button</span>
                         </div>
                     </div>
@@ -386,11 +221,11 @@
             </div>
             <div class="col-lg-9 bg-white pt-30 pb-50">
                 <div class="col p-20 bg-white">
-                    <div class="promo-box section-sample-box p-x-40 m-x-40">
+                    <div class="promo-box section-sample-body p-x-40 m-x-40">
                         <h4>This Is A Subeader</h4>
                         <p class="ts-body">This is Body copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere
                             quod, incidunt rerum eveniet culpa quaerat dignissimos consequatur voluptates aperiam totam eaque? Corrupti
-                            magnam ex accusamus, officiis eligendi dicta. Sit totam ipsa laboriosam praesentium alias voluptas harum aliquam, illo, facilis necessitatibus, numquam dolorum quo. <span class="sq-link" style="color: teal;">This is an Inline Link.</span></p>
+                            magnam ex accusamus, officiis eligendi dicta. Sit totam ipsa laboriosam praesentium alias voluptas harum aliquam, illo, facilis necessitatibus, numquam dolorum quo. <span class="sq-link" style="color: {{style_guide.accent_2_color}};">This is an Inline Link.</span></p>
                     </div>
                 </div>
             </div>

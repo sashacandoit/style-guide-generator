@@ -131,7 +131,7 @@
 
 /* section samples */
 
-.section-sample-box {
+.section-sample-splash, .section-sample-body {
     background-color: #f5f7fe40 !important;
 }
 

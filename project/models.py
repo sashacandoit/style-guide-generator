@@ -344,6 +344,8 @@ class TypesettingStyle(db.Model):
         db.ForeignKey('style_ref.id', ondelete='CASCADE')
     )
 
+    style_ref_details = db.relationship("StyleRef")
+
 
 
 
@@ -378,7 +380,7 @@ class StyleColor(db.Model):
     id = db.Column (
         db.Integer,
         primary_key=True,
-        auto_increment=True
+        autoincrement=True
     )
 
     style_ref = db.Column(
