@@ -321,25 +321,11 @@ def view_style_guide(style_guide_id):
 
     typesettings = TypesettingStyle.query.filter_by(style_guide_id=style_guide.id)
 
-    
 
 
-    # for typesetting in typesettings:
-    #     style_ref = typesetting.style_ref
-    #     typeface = typesetting.typeface
-    #     variant = typesetting.variant
-    #     text_size=typesetting.text_size
-    #     text_transform = typesetting.text_transform
-
-    #     styles = {
-    #         'style_ref':style_ref, 
-    #         'typeface':typeface,
-    #         'variant':variant,
-    #         'text_size':text_size,
-    #         'text_transform':text_transform
-    #          }
-    #     return styles
-
-
-
-    return render_template('style_guide.html', variants=variants, typesettings=typesettings, style_guide=style_guide)
+    return render_template(
+        'style_guide.html', 
+        variants=variants, 
+        typesettings=typesettings, 
+        style_guide=style_guide
+        )

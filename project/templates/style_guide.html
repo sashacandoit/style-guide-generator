@@ -11,21 +11,33 @@
         font-family: "{{style_guide.primary_typeface}}";
     }
 
-    .ts-name-a {
+    .sg-a {
+        text-decoration: underline;
         color: {{style_guide.accent_1_color}};
     }
 
-    .section-sample-splash, .section-sample-body > h1, h2, h3, h4, h5, p, div {
-        font-family: "{{style_guide.primary_typeface}}";
+    {% for typesetting in typesettings %}
+    
+    .sg-{{typesetting.style_ref}} {
+        font-family: "{{typesetting.typeface}}";
+        font-size: {{typesetting.text_size}}px;
+        font-weight: {{typesetting.font_weight}};
+        text-transform: {{typesetting.text_transform}}
     }
 
+    {% endfor %}
+
+
 </style>
+
 
 {% for variant in variants %}
 <link rel="stylesheet" href={{variant.url}}>
 {% endfor %}
 
 {% endblock %}
+
+
 
 {% block content %}
 <!-- Style Guide Info Section -->
@@ -127,20 +139,21 @@
                 {% for typesetting in typesettings %}
                 <div class="row p-x-40 align-items-end ts-h1-row mb-40">
                     <div class="col-8">
-                        <div style="font-family: {{typesetting.typeface}}; font-size: {{typesetting.text_size}}px; font-weight: {{typesetting.font_weight}}; font-style: {{typesetting.font_style}}" class="m-y-0 ts-name-{{typesetting.style_ref}}">{{ typesetting.style_ref_details.name }}</div>
+                        <div class="sg-{{typesetting.style_ref}} m-y-0">{{ typesetting.style_ref_details.name }}</div>
                         <div class="fw-light"><b class="text-uppercase">{{ typesetting.style_ref }}</b> {{ typesetting.text_size }}px, {{ typesetting.font_style }}-{{ typesetting.font_weight}}</div>
                     </div>
                     <div class="col-4 color-dots">
                         <div class="row">
-                            <div class="color-dot" style="background-color: {{primary_dark_color}};"></div>
-                            <div class="color-dot" style="background-color: {{primary_light_color}};"></div>
+                            <div class="color-dot" style="background-color: {{style_guide.primary_dark_color}};"></div>
+                            <div class="color-dot" style="background-color: {{style_guide.primary_light_color}};"></div>
+                            <div class="color-dot" style="background-color: {{style_guide.accent_1_color}};"></div>
+                            <div class="color-dot" style="background-color: {{style_guide.accent_2_color}};"></div>
                         </div>
                         
                         <div class="row">
                             <div class="fw-light ts-uses">{{ typesetting.style_ref_details.uses }}</div>
                         </div>
                     </div>
-                    
                 </div>
                 {% endfor %}
             </div>
@@ -157,17 +170,17 @@
                     <!-- Primary Button Main -->
                     <div class="col-5 p-20 bg-white">
                         <div class="sg-dark-btn text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
-                            <span class="h6">Primary button</span>
+                            <span class="sg-h6">Primary button</span>
                         </div>
 
                         <!-- Primary Button Pressed State -->
                         <div class="sg-dark-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
-                            <span class="h6">Pressed State</span>
+                            <span class="sg-h6">Pressed State</span>
                         </div>
 
                         <!-- Primary Button Deactivated State -->
                         <div class="sg-dark-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_1_color}}">
-                            <span class="h6">Deactivated State</span>
+                            <span class="sg-h6">Deactivated State</span>
                         </div>
                     </div>
 
@@ -175,17 +188,17 @@
                     <div class="col-4 p-20 bg-white">
                         <!-- Secondary Button Main State -->
                         <div class="sg-dark-btn text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
-                            <span class="h6">Secondary button</span>
+                            <span class="sg-h6">Secondary button</span>
                         </div>
 
                         <!-- Secondary Button Pressed State -->
                         <div class="sg-dark-btn sg-btn-pressed text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
-                            <span class="h6">Pressed State</span>
+                            <span class="sg-h6">Pressed State</span>
                         </div>
                         
                         <!-- Secondary Button Deactivated State -->
                         <div class="sg-dark-btn sg-btn-deact text-center p-x-10 mb-20" style="background-color:{{style_guide.accent_2_color}}">
-                            <span class="h6">Deactivated State</span>
+                            <span class="sg-h6">Deactivated State</span>
                         </div>
                     </div>
                 </div>
@@ -202,10 +215,10 @@
             <div class="col-lg-9 bg-white pt-30 pb-50">
                 <div class="col p-20 bg-white">
                     <div class="promo-box section-sample-splash p-x-40 m-x-40">
-                       <h1>This Is A Display Header</h1>
-                       <h5>This is Headline copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere quod, incidunt rerum eveniet culpa quaerat dignissimos consequatur voluptates aperiam totam eaque? Corrupti magnam ex accusamus, officiis eligendi dicta.</h5> 
-                        <div class="sg-dark-btn text-center p-x-10 mt-30 mb-20" style="background-color:{{style_guide.accent_1_color}}">
-                            <span class="h6">Primary button</span>
+                       <h1 class="sg-h1">This Is A Display Header</h1>
+                       <h5 class="sg-h5">This is Headline copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere quod, incidunt rerum eveniet culpa quaerat dignissimos consequatur voluptates aperiam totam eaque? Corrupti magnam ex accusamus, officiis eligendi dicta.</h5> 
+                        <div class="sg-h6 sg-dark-btn text-center p-x-10 mt-30 mb-20" style="background-color:{{style_guide.accent_2_color}}">
+                            <span class="sg-h6">Primary button</span>
                         </div>
                     </div>
                 </div>
@@ -222,10 +235,10 @@
             <div class="col-lg-9 bg-white pt-30 pb-50">
                 <div class="col p-20 bg-white">
                     <div class="promo-box section-sample-body p-x-40 m-x-40">
-                        <h4>This Is A Subeader</h4>
-                        <p class="ts-body">This is Body copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere
+                        <h4 class="sg-h4">This Is A Subeader</h4>
+                        <p class="sg-p">This is Body copy. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores doloremque facere
                             quod, incidunt rerum eveniet culpa quaerat dignissimos consequatur voluptates aperiam totam eaque? Corrupti
-                            magnam ex accusamus, officiis eligendi dicta. Sit totam ipsa laboriosam praesentium alias voluptas harum aliquam, illo, facilis necessitatibus, numquam dolorum quo. <span class="sq-link" style="color: {{style_guide.accent_2_color}};">This is an Inline Link.</span></p>
+                            magnam ex accusamus, officiis eligendi dicta. Sit totam ipsa laboriosam praesentium alias voluptas harum aliquam, illo, facilis necessitatibus, numquam dolorum quo. <span class="sg-a" style="color: {{style_guide.accent_1_color}};">This is an Inline Link.</span></p>
                     </div>
                 </div>
             </div>
