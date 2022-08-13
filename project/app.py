@@ -166,7 +166,7 @@ def start_new_styleguide(username):
 
         # adds new style guide to session
         session['style_guide'] = new_style_guide.id
-        style_tag = 'p'
+        style_tag = 'h1'
         session['current_state'] = style_tag
 
         # adds primary typeface variants to database
@@ -232,7 +232,7 @@ def typesetting_styles(style_guide_id, current_state):
 
     # check session for current form state
     if "current_state" not in session:
-        session['current_state'] = 'p'
+        session['current_state'] = 'h1'
 
 
     style_ref_details, primary_typeface, variants, form, style_ref = getTypesettingData(style_guide, session['current_state'])
@@ -250,9 +250,18 @@ def typesetting_styles(style_guide_id, current_state):
 
         db.session.add(typesetting)
         db.session.commit()
+
+        if session['current_state'] == 'p':
+            a_typesetting = TypesettingStyle(
+                style_guide_id=style_guide_id, typeface=primary_typeface, font_weight=font_weight, font_style=font_style, text_size=text_size, text_transform=text_transform, style_ref='a'
+            )
+
+            db.session.add(a_typesetting)
+            db.session.commit()
+
         
         # list of typesetting styles to generate form for
-        form_flows = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+        form_flows = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']
 
         # check which style tag is next in the list, or if list is complete
         if form_flows.index(session['current_state']) + 1 < len(form_flows):
