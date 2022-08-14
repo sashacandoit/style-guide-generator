@@ -52,7 +52,7 @@ class User(db.Model):
     )
 
 
-    style_guides = db.relationship('StyleGuide', backref='user')
+    style_guides = db.relationship('StyleGuide', cascade="all,delete", backref='user')
 
 
 
@@ -107,7 +107,7 @@ class StyleGuide(db.Model):
 
     username = db.Column(
         db.Text,
-        db.ForeignKey('user.username', ondelete='CASCADE')
+        db.ForeignKey('user.username', ondelete='CASCADE'), nullable=False
     )
 
     title = db.Column(
@@ -119,7 +119,7 @@ class StyleGuide(db.Model):
         db.Text
     )
 
-    variants = db.relationship('TypefaceVariant', backref='style_guide')
+    variants = db.relationship('TypefaceVariant', cascade="all,delete", backref='style_guide')
 
     primary_dark_color = db.Column(
         db.Text
@@ -137,7 +137,7 @@ class StyleGuide(db.Model):
         db.Text
     )
 
-    typesetting_styles = db.relationship("TypesettingStyle", backref='style_guide')
+    typesetting_styles = db.relationship("TypesettingStyle", cascade="all,delete", backref='style_guide')
 
 
     timestamp = db.Column(
@@ -408,120 +408,5 @@ def format_datetime():
     date_time = datetime.utcnow()
     format_date = date_time.strftime("%d %B, %Y")
     return format_date
-
-
-
-
-#############################################################
-# IGNORE THIS MESS
-#############################################################
-
-#     def convert_color_to_rgb(self, color):
-#         """Convert a color name or hex value to rbg value"""
-
-#         def hex_to_rgb():
-#             rgb = hex_to_rgb(color)
-#             print(rgb)
-#             return rgb
-
-#         def name_to_rgb():
-#             rgb = name_to_rgb(color)
-#             print(rgb)
-#             return rgb
-
-#         for func in [hex_to_rgb, name_to_rgb]:
-#             try:
-#                 func(color)
-#                 break
-#             except Exception as err:
-#                 print (err, f"{color} is not a valid color")
-#                 continue
-
-
-
-
-# def get_variant_urls(typeface):
-#     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
-
-#     data = res.json()
-#     api_urls = []
-#     base_url = 'https://fonts.googleapis.com/css?family='
-#     base_url = base_url + (typeface.replace(" ", "+"))
-    
-
-#     for item in data['items']:
-#         if item['family'] == typeface:
-#             variants = item['variants']
-#             for variant in variants:
-#                 variant_url = base_url + ':' + variant
-#                 api_urls.append(variant_url) 
-    
-#     print(api_urls)
-#     return api_urls
-
-
-# def get_variant_choices(typeface):
-#     res = requests.get('https://www.googleapis.com/webfonts/v1/webfonts', params={"key": GOOGLE_API_KEY})
-
-#     data = res.json()
-#     typeface_variants = []
-
-#     for item in data['items']:
-#         font_family = item['family']
-#         category = item['category']
-#         for variant in item['variants']:
-#             if font_family == typeface:
-#                 variant = variant
-#                 typeface_variant = (variant, variant)
-#                 typeface_variants.append(typeface_variant)
-
-#     print(typeface_variants)
-#     return typeface_variants
-
-
-# class APIFontStyle(db.Model):
-
-#     ___tablename__ = 'api_font_styles'
-
-#     id = db.Column(
-#         db.Integer,
-#         primary_key=True,
-#         autoincrement=True
-#     )
-
-#     font_family = db.Column(
-#         db.Text,
-#         nullable=False
-#     )
-
-#     variant = db.Column(
-#         db.Text,
-#         nullable=False,
-#         default="regular"
-#     )
-
-#     category = db.Column(
-#         db.Text,
-#         nullable=False
-#     )
-
-#     css_url = db.Column(
-#         db.Text
-#     )
-
-#     @classmethod
-#     def gen_font_data(cls, font_family, variant, category):
-#         """
-#         Adds font api data to the APIFontStyles table
-#         """
-
-#         font_style = APIFontStyle(
-#             font_family=font_family,
-#             variant=variant,
-#             category=category
-#         )
-
-#         return font_style
-
 
 

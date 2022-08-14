@@ -35,6 +35,10 @@
 
 /*-- style guide --*/
 
+button.delete-btn:hover {
+    color: red !important;
+}
+
 /* color scheme */
 .color-scheme-row {
     min-height: 200px;

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, session
-from forms import AddUserForm, LoginForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm
+from forms import AddUserForm, LoginForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm, DeleteStyleGuideForm
 from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef, StyleColor
 from sqlalchemy.exc import IntegrityError
 
@@ -119,7 +119,7 @@ def delete_user(username):
     user = User.query.get_or_404(username)
         
     if username != session['username'] or "username" not in session:
-        flash('Sorry, you are not authorized for that')
+        flash('Sorry, you are not authorized to do that')
         return redirect('/')
         
     form = DeleteForm()
@@ -128,8 +128,8 @@ def delete_user(username):
         db.session.commit()
         session.pop("username")
 
-        flash("User Deleted!")
-        return redirect('/')
+    flash("User Deleted!")
+    return redirect('/')
 
 
 
@@ -317,21 +317,44 @@ def color_scheme(style_guide_id):
 ##################################
 
 
-@app.route('/style-guide/<style_guide_id>')
+@app.route('/style-guide/<style_guide_id>', methods=["GET", "POST"])
 def view_style_guide(style_guide_id):
 
     style_guide = StyleGuide.query.get(style_guide_id)
+
+    if style_guide.username != session['username'] or "username" not in session:
+        flash('Sorry, you are not authorized to view that page')
+        return redirect('/')
+
+    form = DeleteStyleGuideForm()
 
     #gets all typesetting variants for style guide
     variants = TypefaceVariant.query.filter_by(style_guide_id=style_guide.id)
 
     typesettings = TypesettingStyle.query.filter_by(style_guide_id=style_guide.id)
 
-
-
     return render_template(
         'style_guide.html', 
         variants=variants, 
         typesettings=typesettings, 
-        style_guide=style_guide
+        style_guide=style_guide, form=form
         )
+
+
+@app.route('/style-guide/<style_guide_id>/delete', methods=["GET", "POST"])
+def delete_style_guide(style_guide_id):
+    """Delete current style guide in view"""
+
+    style_guide = StyleGuide.query.get_or_404(style_guide_id)
+
+    if style_guide.username != session['username'] or "username" not in session:
+        flash('Sorry, you are not authorized to do that')
+        return redirect('/')
+    
+    form = DeleteStyleGuideForm()
+    if form.validate_on_submit():
+        db.session.delete(style_guide)
+        db.session.commit()
+
+    flash("Style Guide Deleted!")
+    return redirect(f'/users/{session["username"]}')
