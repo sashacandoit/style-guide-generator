@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, session
-# from flask_colorpicker import colorpicker
-import webcolors 
-from webcolors import hex_to_rgb
-from forms import AddUserForm, LoginForm, UpdateUserForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm
+from forms import AddUserForm, LoginForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm
 from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef, StyleColor
 from sqlalchemy.exc import IntegrityError
 
@@ -122,7 +119,7 @@ def delete_user(username):
     user = User.query.get_or_404(username)
         
     if username != session['username'] or "username" not in session:
-        flash('Sorry, you are not authorized to view that page')
+        flash('Sorry, you are not authorized for that')
         return redirect('/')
         
     form = DeleteForm()
@@ -131,8 +128,8 @@ def delete_user(username):
         db.session.commit()
         session.pop("username")
 
-    flash("User Deleted!")
-    return redirect('/')
+        flash("User Deleted!")
+        return redirect('/')
 
 
 

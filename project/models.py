@@ -107,8 +107,7 @@ class StyleGuide(db.Model):
 
     username = db.Column(
         db.Text,
-        db.ForeignKey('user.username', ondelete='CASCADE'),
-        nullable=False
+        db.ForeignKey('user.username', ondelete='CASCADE')
     )
 
     title = db.Column(
