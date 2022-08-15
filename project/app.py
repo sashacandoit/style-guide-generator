@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from forms import AddUserForm, LoginForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm, DeleteStyleGuideForm
-from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef, StyleColor
+from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef
 from sqlalchemy.exc import IntegrityError
 
 
@@ -22,12 +22,12 @@ connect_db(app)
 @app.route('/')
 def home_page():
     """Render home page"""
-    
     return redirect('/login')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
+    """Register new user, add to database and add to session"""
 
     if "username" in session:
         return redirect(f"users/{session['username']}")
@@ -63,6 +63,7 @@ def register_user():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_user():
+    """Log in registered user and add to session"""
 
     if "username" in session:
         return redirect(f"users/{session['username']}")
@@ -91,6 +92,8 @@ def login_user():
 
 @app.route('/logout')
 def logout_user():
+    """ Log out current user - remove from session """
+
     session.pop('username')
     flash("See you soon!", "primary")
     return redirect('/login')
@@ -99,6 +102,9 @@ def logout_user():
 
 @app.route('/users/<username>')
 def show_user(username):
+    """
+    Show current logged in user profile with all style guides 
+    """
     
     if username != session['username'] or "username" not in session:
         flash("Sorry, you are not authorized to view that page")
@@ -188,11 +194,11 @@ def start_new_styleguide(username):
     return render_template('style_guide_new.html', user=user, form=form)
 
 
-##################################
-# TYPESETTING ROUTES
-##################################
+
 
 def getTypesettingData(style_guide, tag_type):
+    """ Gets typesetting data and variants for user style guide primary typeface """
+
     # gets typesetting description
     style_ref_details = StyleRef.query.get(tag_type)
 
@@ -217,7 +223,9 @@ def getTypesettingData(style_guide, tag_type):
 
 @app.route('/style-guide/<style_guide_id>/typesetting/<current_state>', methods=["GET", "POST"])
 def typesetting_styles(style_guide_id, current_state):
-    """defines typesetting style for current style with TypeSettingForm using variants from primary typeface in style guide """
+    """
+    Defines typesetting styles for all typesettings needed in styl guide with TypeSettingForm - using variants from primary typeface in style guide 
+    """
 
     # retrieves style guide id from session 
     style_guide = StyleGuide.query.get(style_guide_id)
@@ -277,12 +285,10 @@ def typesetting_styles(style_guide_id, current_state):
 
 
 
-##################################
-# COLOR SCHEME ROUTE
-##################################
-
 @app.route('/style-guide/<style_guide_id>/color-scheme', methods=["GET", "POST"])
 def color_scheme(style_guide_id):
+    """ Renders form for user to select color scheme for current style guide """
+     
     # retrieves style guide id from session 
     style_guide = StyleGuide.query.get(style_guide_id)
     form = ColorSchemeForm()
@@ -312,13 +318,10 @@ def color_scheme(style_guide_id):
 
 
 
-##################################
-# VIEW STYLE GUIDE ROUTE
-##################################
-
 
 @app.route('/style-guide/<style_guide_id>', methods=["GET", "POST"])
 def view_style_guide(style_guide_id):
+    """ View fully rendered style guide """
 
     style_guide = StyleGuide.query.get(style_guide_id)
 
@@ -337,7 +340,8 @@ def view_style_guide(style_guide_id):
         'style_guide.html', 
         variants=variants, 
         typesettings=typesettings, 
-        style_guide=style_guide, form=form
+        style_guide=style_guide, 
+        form=form
         )
 
 
@@ -346,6 +350,11 @@ def delete_style_guide(style_guide_id):
     """Delete current style guide in view"""
 
     style_guide = StyleGuide.query.get_or_404(style_guide_id)
+    print("**************************")
+    print(style_guide.id)
+    print(style_guide.username)
+    print(session['username'])
+    print("**************************")
 
     if style_guide.username != session['username'] or "username" not in session:
         flash('Sorry, you are not authorized to do that')

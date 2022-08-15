@@ -5,10 +5,11 @@ db.drop_all()
 db.create_all()
 
 
+
 # Create starting user
-username = 'sashacandoit'
-full_name = 'Sasha C'
-email = 'sasha@email.com'
+username = 'admin'
+full_name = 'Admin User'
+email = 'user@email.com'
 password = 'password'
 
 user1 = User.register(username, full_name, email,  password)
@@ -104,7 +105,7 @@ db.session.commit()
 
 
 sample_guide = StyleGuide(
-    username = 'sashacandoit',
+    username = 'admin',
     title = 'Sample Title 1',
     primary_typeface = 'Lora',
     primary_dark_color = '#0D0D0D',
