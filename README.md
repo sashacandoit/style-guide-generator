@@ -74,6 +74,7 @@ Any user can see the homepage showing public/shared style guides, but only regis
 
 #### Future Improvements
 
+* Responsive layout for Mobile
 * Users should be able to make adjustments to color schemes and already generated style guides. Right now, the only option is to create a new style guide or delete existing style guides. 
 * Users should be able to move forward and backward through the style guide generating forms, in case they need to make changes as they go. 
 * Would like users to be able to preview fonts before selecting a primary font for their style guide - in case they are still in the exploring stage of the brand's development.
@@ -89,41 +90,41 @@ Any user can see the homepage showing public/shared style guides, but only regis
 
 ##### ![](sceenshots/login.png)
 
-[^Login]: 
+*Login*
 
 
 
 ![](sceenshots/register.png)
 
-[^Register]: 
+*Register*
 
 
 
 ![](sceenshots/user_profile.png)
 
-[^User Profile]: 
+*User Profile*
 
 
 
 ![](sceenshots/start_new_style_guide.png)
 
-[^Start New Style Guide]: 
+*Start New Style Guide*
 
 
 
 ![](sceenshots/typeface_form.png)
 
-[^Set Typesetting Styles]: 
+*Set Typesetting Styles*
 
 
 
 ![](sceenshots/color_scheme_form.png)
 
-[^Set Color Scheme]: 
+*Set Color Scheme*
 
 
 
 ![](sceenshots/generated_style_guide.png)
 
-[^Sample Generated Style Guide]: 
+*Sample Generated Style Guide*
 
