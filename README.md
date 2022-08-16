@@ -80,3 +80,49 @@ Any user can see the homepage showing public/shared style guides, but only regis
 * Would want to add on a color palette generating API to give users the option of developing / generating color palettes separately, and later adding them to their style guides.
 * A filtering feature on the homepage would be nice, so users can view all public style guides by popularity (most likes), by color palette, or by font family / style.
 * Would want to add a social aspect, where users can choose to share their creations with other registered users or make them private. Ideally the community of users can browse style guides by other users, and  "favorite" those that they want to use as inspiration. 
+
+------
+
+#### Screenshots
+
+
+
+##### ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/login.png)
+
+*Login*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/register.png)
+
+*Register*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/start_new_style_guide.png)
+
+*Start New Style Guide*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/user_profile.png)
+
+*User Profile*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/typeface_form.png)
+
+*Choose Typesetting Styles*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/color_scheme_form.png)
+
+*Choose Color Scheme*
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/generated_style_guide.png)
+
+*Sample Generated Style Guide*
