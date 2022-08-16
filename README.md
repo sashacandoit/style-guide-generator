@@ -88,43 +88,31 @@ Any user can see the homepage showing public/shared style guides, but only regis
 
 
 
-##### ![](sceenshots/login.png)
-
-*Login*
+##### *Login*![](sceenshots/login.png)
 
 
 
-![](sceenshots/register.png)
-
-*Register*
+*Register*![](sceenshots/register.png)
 
 
 
-![](sceenshots/user_profile.png)
-
-*User Profile*
+*User Profile*![](sceenshots/user_profile.png)
 
 
 
-![](sceenshots/start_new_style_guide.png)
-
-*Start New Style Guide*
+*Start New Style Guide*![](sceenshots/start_new_style_guide.png)
 
 
 
-![](sceenshots/typeface_form.png)
-
-*Set Typesetting Styles*
+*Set Typesetting Styles*![](sceenshots/typeface_form.png)
 
 
 
-![](sceenshots/color_scheme_form.png)
-
-*Set Color Scheme*
+*Set Color Scheme*![](sceenshots/color_scheme_form.png)
 
 
 
-![](sceenshots/generated_style_guide.png)
+*Sample Generated Style Guide*![](sceenshots/generated_style_guide.png)
 
-*Sample Generated Style Guide*
+
 
