@@ -39,11 +39,18 @@
             </div>
 
             <div class="col-md-6">
-                <div class="row justify-content-between">
+                <div class="row justify-content-end">
                     {% for variant in variants %}
+                    {% if variant.style != 'italic' %}
                     <div class="col-6 col-md-3">
                         <span style="font-weight:{{variant.weight}}; font-style:{{variant.style}}" class="typeface-weight-set">Aa</span>
                     </div>
+                    {% endif %}
+                    {% if variant.style == 'italic' %}
+                    <div class="col-6 col-md-3">
+                        <span style="font-weight:{{variant.weight}}; font-style:{{variant.style}}" class="typeface-weight-set">Aa</span>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                     
                 </div>

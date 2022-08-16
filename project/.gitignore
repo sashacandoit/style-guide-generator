@@ -2,7 +2,6 @@
 venv/
 __pycache__/
 models/__pycache__/
-project/__pycache__/
+__pycache__/
 api_keys.py
 models/
-__pycache__/app.cpython-39.pyc
