@@ -89,40 +89,41 @@ Any user can see the homepage showing public/shared style guides, but only regis
 
 ##### ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/login.png)
 
-*Login*
+[^Login]: 
 
 
 
 ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/register.png)
 
-*Register*
-
-
-
-![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/start_new_style_guide.png)
-
-*Start New Style Guide*
+[^Register]: 
 
 
 
 ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/user_profile.png)
 
-*User Profile*
+[^User Profile]: 
+
+
+
+![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/start_new_style_guide.png)
+
+[^Start New Style Guide]: 
 
 
 
 ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/typeface_form.png)
 
-*Choose Typesetting Styles*
+[^Set Typesetting Styles]: 
 
 
 
 ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/color_scheme_form.png)
 
-*Choose Color Scheme*
+[^Set Color Scheme]: 
 
 
 
 ![](/Users/sashahome/Dropbox/Sasha/SpringBoard/Capstone_1/sceenshots/generated_style_guide.png)
 
-*Sample Generated Style Guide*
+[^Sample Generated Style Guide]: 
+
