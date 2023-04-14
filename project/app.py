@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, session
 from forms import AddUserForm, LoginForm, DeleteForm, TypesettingForm, NewStyleGuideForm, ColorSchemeForm, DeleteStyleGuideForm
 from models import db, connect_db, User, get_all_fonts, StyleGuide, TypesettingStyle, TypefaceVariant, get_typeface_variants, StyleRef
 from sqlalchemy.exc import IntegrityError
-# import os
+import os
 
 
 app = Flask(__name__)
@@ -10,7 +10,21 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
 #     'DATABASE_URL', 'postgresql://capstone_1_db')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///capstone_1_db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hmhngiqnvkiqqs:45428ae71c0478f58c73c90b93c406626f5c0ec2a35cda26273ded7420db2cb1@ec2-34-234-240-121.compute-1.amazonaws.com:5432/d2ph0rksti6d96'
+
+# Heroku Database
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hmhngiqnvkiqqs:45428ae71c0478f58c73c90b93c406626f5c0ec2a35cda26273ded7420db2cb1@ec2-34-234-240-121.compute-1.amazonaws.com:5432/d2ph0rksti6d96'
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://gdvirorbhkyrns:d7f7c7d9816c06c510f18c89ddc2fd75f530c03e032b5932c9d639faa3e0eeda@ec2-44-194-34-55.compute-1.amazonaws.com:5432/de1t1dctn9auum'
+
+# Render Database - External
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://styleguide_db_user:9Xe0iYXC8xRph2kf7MDwspfVmkGwezNY@dpg-cgruquhmbg5e4kirvt0g-a.ohio-postgres.render.com/styleguide_db'
+
+# Render Database - Internal
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://styleguide_db_user:9Xe0iYXC8xRph2kf7MDwspfVmkGwezNY@dpg-cgruquhmbg5e4kirvt0g-a/styleguide_db'
+
+# 'postgresql://styleguide_db_user:9Xe0iYXC8xRph2kf7MDwspfVmkGwezNY@dpg-cgruquhmbg5e4kirvt0g-a/styleguide_db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'somethingsecret'
